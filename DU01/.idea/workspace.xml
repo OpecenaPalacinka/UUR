@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Zadani01OOP" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="49d7f34e-d56f-4956-8914-4ee3f54a9a80" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="DU01" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1XzIflZ5GnWmTWv45LxCHrTZHWh" />
+  <component name="ProjectViewState">
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
+    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="OOP01" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="DU01" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="49d7f34e-d56f-4956-8914-4ee3f54a9a80" name="Default Changelist" comment="" />
+      <created>1582042601957</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582042601957</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="396" y="187" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1582042671408">
+      <screen x="0" y="23" width="1280" height="709" />
+    </state>
+    <state x="396" y="187" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1280.709@0.23.1280.709" timestamp="1582042671408" />
+    <state x="453" y="100" key="#com.intellij.ide.util.MemberChooser" timestamp="1582276817471">
+      <screen x="0" y="23" width="1280" height="709" />
+    </state>
+    <state x="453" y="100" key="#com.intellij.ide.util.MemberChooser/0.23.1280.709@0.23.1280.709" timestamp="1582276817471" />
+    <state x="377" y="168" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1582461815579">
+      <screen x="0" y="23" width="1280" height="709" />
+    </state>
+    <state x="377" y="168" key="#com.intellij.ide.util.TreeClassChooserDialog/0.23.1280.709@0.23.1280.709" timestamp="1582461815579" />
+    <state x="378" y="131" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1582453078320">
+      <screen x="0" y="23" width="1280" height="709" />
+    </state>
+    <state x="378" y="131" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1280.709@0.23.1280.709" timestamp="1582453078320" />
+    <state width="1238" height="175" key="GridCell.Tab.0.bottom" timestamp="1582476511838">
+      <screen x="0" y="23" width="1280" height="709" />
+    </state>
+    <state width="1238" height="175" key="GridCell.Tab.0.bottom/0.23.1280.709@0.23.1280.709" timestamp="1582476511838" />
+    <state width="1238" height="175" key="GridCell.Tab.0.center" timestamp="1582476511837">
+      <screen x="0" y="23" width="1280" height="709" />
+    </state>
+    <state width="1238" height="175" key="GridCell.Tab.0.center/0.23.1280.709@0.23.1280.709" timestamp="1582476511837" />
+    <state width="1238" height="175" key="GridCell.Tab.0.left" timestamp="1582476511836">
+      <screen x="0" y="23" width="1280" height="709" />
+    </state>
+    <state width="1238" height="175" key="GridCell.Tab.0.left/0.23.1280.709@0.23.1280.709" timestamp="1582476511836" />
+    <state width="1238" height="175" key="GridCell.Tab.0.right" timestamp="1582476511837">
+      <screen x="0" y="23" width="1280" height="709" />
+    </state>
+    <state width="1238" height="175" key="GridCell.Tab.0.right/0.23.1280.709@0.23.1280.709" timestamp="1582476511837" />
+    <state x="128" y="23" key="SettingsEditor" timestamp="1582462138576">
+      <screen x="0" y="23" width="1280" height="709" />
+    </state>
+    <state x="128" y="23" key="SettingsEditor/0.23.1280.709@0.23.1280.709" timestamp="1582462138576" />
+    <state x="427" y="253" key="classpath-attribute-editor" timestamp="1582461819818">
+      <screen x="0" y="23" width="1280" height="709" />
+    </state>
+    <state x="427" y="253" key="classpath-attribute-editor/0.23.1280.709@0.23.1280.709" timestamp="1582461819818" />
+  </component>
+</project>

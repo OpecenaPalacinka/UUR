@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_du01" default="compile.module.du01">
+  <dirname property="module.du01.basedir" file="${ant.file.module_du01}"/>
+  
+  <property name="module.jdk.home.du01" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.du01" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.du01" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.du01" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
+  
+  <property name="du01.output.dir" value="${module.du01.basedir}/out/production/DU01"/>
+  <property name="du01.testoutput.dir" value="${module.du01.basedir}/out/test/DU01"/>
+  
+  <path id="du01.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="du01.module.production.classpath">
+    <path refid="${module.jdk.classpath.du01}"/>
+  </path>
+  
+  <path id="du01.runtime.production.module.classpath">
+    <pathelement location="${du01.output.dir}"/>
+  </path>
+  
+  <path id="du01.module.classpath">
+    <path refid="${module.jdk.classpath.du01}"/>
+    <pathelement location="${du01.output.dir}"/>
+  </path>
+  
+  <path id="du01.runtime.module.classpath">
+    <pathelement location="${du01.testoutput.dir}"/>
+    <pathelement location="${du01.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.du01">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.du01">
+    <patternset refid="excluded.from.module.du01"/>
+  </patternset>
+  
+  <path id="du01.module.sourcepath">
+    <dirset dir="${module.du01.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.du01" depends="compile.module.du01.production,compile.module.du01.tests" description="Compile module DU01"/>
+  
+  <target name="compile.module.du01.production" depends="register.custom.compilers" description="Compile module DU01; production classes">
+    <mkdir dir="${du01.output.dir}"/>
+    <javac2 destdir="${du01.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.du01}/javac">
+      <compilerarg line="${compiler.args.du01}"/>
+      <bootclasspath refid="du01.module.bootclasspath"/>
+      <classpath refid="du01.module.production.classpath"/>
+      <src refid="du01.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.du01"/>
+    </javac2>
+    
+    <copy todir="${du01.output.dir}">
+      <fileset dir="${module.du01.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.du01.tests" depends="register.custom.compilers,compile.module.du01.production" description="compile module DU01; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.du01" description="cleanup module">
+    <delete dir="${du01.output.dir}"/>
+    <delete dir="${du01.testoutput.dir}"/>
+  </target>
+</project>

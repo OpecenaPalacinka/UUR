@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Zadani01OOP">
+    <output-path>$PROJECT_DIR$/out/artifacts/Zadani01OOP</output-path>
+    <root id="archive" name="Zadani01OOP.jar">
+      <element id="directory" name="src">
+        <element id="module-source" name="DU01" />
+        <element id="module-output" name="DU01" />
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
