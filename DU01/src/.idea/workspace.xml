@@ -12,7 +12,11 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="ProjectId" id="1XzFzoJKBn6zpZenluBrQeMc7wH" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="flattenPackages" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -108,10 +112,10 @@
       <screen x="0" y="23" width="1280" height="709" />
     </state>
     <state x="128" y="23" key="SettingsEditor/0.23.1280.709@0.23.1280.709" timestamp="1583318694088" />
-    <state x="333" y="210" key="com.intellij.ide.util.TipDialog" timestamp="1583318242645">
+    <state x="333" y="210" key="com.intellij.ide.util.TipDialog" timestamp="1583359262408">
       <screen x="0" y="23" width="1280" height="709" />
     </state>
-    <state x="333" y="210" key="com.intellij.ide.util.TipDialog/0.23.1280.709@0.23.1280.709" timestamp="1583318242645" />
+    <state x="333" y="210" key="com.intellij.ide.util.TipDialog/0.23.1280.709@0.23.1280.709" timestamp="1583359262408" />
     <state x="69" y="23" key="new project wizard" timestamp="1582042601895">
       <screen x="0" y="23" width="1280" height="709" />
     </state>
