@@ -7,7 +7,6 @@ public class Krysy extends AAnimal implements Savci {
     }
 
     public void moveTo(float x, float y) {
-        super.moveTo(x,y);
         int energie = getEnergie();
         if (energie<=0){
             System.out.println("Nemas dostatek energie");
@@ -23,7 +22,6 @@ public class Krysy extends AAnimal implements Savci {
     }
 
     public void eat(int pridano){
-        super.eat(pridano);
         int energie = getEnergie();
         energie += pridano;
         System.out.println("Energie je: " +energie+" a zvire jedlo "+jidlo);

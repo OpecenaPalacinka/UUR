@@ -16,7 +16,7 @@ public class Main {
         Lenochodi jedenacty = new Lenochodi("Jedenacty", 2, 5, 31);
         Lenochodi dvanacty = new Lenochodi("CBA", 2, 12, 11);
 /*
- AAnimal[] vsechny = new AAnimal[12];
+ Ieat[] vsechny = new Ieat[12];
  vsechny[0] = prvni;
  vsechny[1] = druhy;
  vsechny[2] = treti;
@@ -30,7 +30,7 @@ public class Main {
  vsechny[10] = jedenacty;
  vsechny[11] = dvanacty;
 
- AAnimal[] vejcorody = new AAnimal[8];
+ IlayEggs[] vejcorody = new IlayEggs[8];
  vejcorody[0] = prvni;
  vejcorody[1] = druhy;
  vejcorody[2] = treti;
@@ -40,7 +40,7 @@ public class Main {
  vejcorody[6] = sedmy;
  vejcorody[7] = osmy;
 
- AAnimal[] hlucna = new AAnimal[8];
+ Icry[] hlucna = new Icry[8];
  hlucna[0] = prvni;
  hlucna[1] = druhy;
  hlucna[2] = treti;
@@ -50,43 +50,43 @@ public class Main {
  hlucna[6] = jedenacty;
  hlucna[7] = dvanacty;
 
- Ptaci[] ptaci = new Ptaci[4];
+ ImoveTo[] ptaci = new ImoveTo[4];
  ptaci[0] = prvni;
  ptaci[1] = druhy;
  ptaci[2] = treti;
  ptaci[3] = ctvrty;
 
  //prvni cyklus
- for (AAnimal zvirata: vsechny
+ for (Ieat zvirata: vsechny
  ) {
  zvirata.eat(2);
  }
  //druhy cyklus
- for (Ptaci zviratka: ptaci
+ for (ImoveTo zviratka: ptaci
  ) {
- ((AAnimal)zviratka).moveTo(4,6);
+ zviratka.moveTo(4,6);
  }
  //treti cyklus
- for (AAnimal hlasita: hlucna
+ for (Icry hlasita: hlucna
  ) {
  if(hlasita instanceof Ptaci){
- ((Ptaci) hlasita).cry();
+ hlasita.cry();
  }
  if(hlasita instanceof Savci){
- ((Savci) hlasita).cry();
+ hlasita.cry();
  }
  }
  //ctvrty cyklus
- for (AAnimal vejce: vejcorody
+ for (IlayEggs vejce: vejcorody
  ) {
  if(vejce instanceof Ryby){
- ((Ryby) vejce).layEggs();
+ vejce.layEggs();
  }
  if(vejce instanceof Ptaci){
- ((Ptaci) vejce).layEggs();
+ vejce.layEggs();
  }
  }
- */
+*/
 
         //DU02
         //1
@@ -101,7 +101,7 @@ public class Main {
 
         for (Ptaci posunPtaci : ptaciArrayList
         ) {
-            ((AAnimal) posunPtaci).moveTo(5, 5);
+            posunPtaci.moveTo(5, 5);
         }
 
         //2
@@ -304,5 +304,7 @@ public class Main {
         }
 
     }
+
+
 
 }

@@ -1,4 +1,3 @@
-public interface Ryby {
-    public void layEggs();
+public interface Ryby extends IlayEggs,ImoveTo,Ieat{
 
 }

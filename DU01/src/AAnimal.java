@@ -4,21 +4,16 @@ public abstract class AAnimal {
     private float y;
     public int energie;
 
-
-
     public AAnimal(String name, float x, float y, int energie) {
         this.name = name;
         this.x = x;
         this.y = y;
         this.energie = energie;
     }
-    public void moveTo(float x, float y) {}
 
     public String getName() {
         return name;
     }
-
-    public void eat(int pridano){}
 
     public float getX() {
         return x;
