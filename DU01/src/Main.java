@@ -1,3 +1,4 @@
+import java.security.Policy;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -243,7 +244,51 @@ public class Main {
              ) {
             System.out.println(prohazenaJmena);
         }
-        
+
+        System.out.println("");
+        System.out.println("Vzestupne:");
+        listJmen.stream()
+                .sorted((jmeno1,jmeno2)->{
+                    if(jmeno1.length() == jmeno2.length()){
+                        return 0;
+                    }
+                    if(jmeno1.length()>jmeno2.length()){
+                        return 1;
+                    } else {return -1;}
+                })
+                .forEach(list -> System.out.println(list));
+
+        System.out.println("");
+        System.out.println("Sestupne:");
+        listJmen.stream()
+                .sorted((jmeno1,jmeno2)->{
+                    if(jmeno1.length() == jmeno2.length()){
+                        return 0;
+                    }
+                    if(jmeno1.length()>jmeno2.length()){
+                        return -1;
+                    } else {return 1;}
+                })
+                .forEach(list -> System.out.println(list));
+
+        //6
+        System.out.println("");
+        System.out.println("Sesta kolekce:");
+        ArrayList<Ryby> poleRyb = new ArrayList<>();
+        poleRyb.add(paty);
+        poleRyb.add(sesty);
+        poleRyb.add(sedmy);
+        poleRyb.add(osmy);
+        poleRyb.add(new Barakudy("novaBarakuda",2,2,12));
+        poleRyb.add(new Kapri("novejKapr",4,3,54));
+
+        System.out.println("Pouze vypis:");
+        for (Ryby vypisRyb: poleRyb
+             ) {
+            System.out.println(vypisRyb);
+        }
+        ArrayList<Ryby> kopiePoleRyb = poleRyb;
+
     }
 
 }
