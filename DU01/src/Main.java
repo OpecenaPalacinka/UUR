@@ -286,6 +286,7 @@ public class Main {
              ) {
             System.out.println(((AAnimal)vypisRyb).getName());
         }
+        System.out.println();
         ArrayList<Ryby> kopiePoleRyb = new ArrayList<>(poleRyb);
         System.out.println("Vypis kopie:");
         for (Ryby kopiePouzeRyb: kopiePoleRyb
@@ -293,6 +294,7 @@ public class Main {
             System.out.println(((AAnimal)kopiePouzeRyb).getName());
         }
         poleRyb.add(3,new Kapri("novejPridanejKapr",4,2,12));
+        System.out.println();
 
         System.out.println("Struktura bez barakud:");
         poleRyb.removeIf(o -> o instanceof Barakudy);
