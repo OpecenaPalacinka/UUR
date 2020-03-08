@@ -1,3 +1,2 @@
-public interface Savci {
- public void cry();
+public interface Savci extends Icry,ImoveTo,Ieat {
 }

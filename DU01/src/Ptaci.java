@@ -1,6 +1,2 @@
-
-public interface Ptaci {
-    public void cry();
-    public void layEggs();
-
+public interface Ptaci extends Icry,IlayEggs,ImoveTo,Ieat {
 }

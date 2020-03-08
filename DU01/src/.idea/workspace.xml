@@ -6,13 +6,46 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc1112de-d4f6-4877-9f10-84e35aa5a9b7" name="Default Changelist" comment="" />
+    <list default="true" id="dc1112de-d4f6-4877-9f10-84e35aa5a9b7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Icry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ieat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IlayEggs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ImoveTo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/DU01/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/DU01/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/DU01/Ptaci.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/DU01/Ptaci.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/DU01/Ryby.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/DU01/Ryby.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/DU01/Savci.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/DU01/Savci.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/DU01/artifacts/src_jar/src.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/DU01/artifacts/src_jar/src.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AAnimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/AAnimal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Barakudy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Barakudy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Holubi.java" beforeDir="false" afterPath="$PROJECT_DIR$/Holubi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kapri.java" beforeDir="false" afterPath="$PROJECT_DIR$/Kapri.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Krysy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Krysy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lenochodi.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lenochodi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Orli.java" beforeDir="false" afterPath="$PROJECT_DIR$/Orli.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ptaci.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ptaci.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ryby.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ryby.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Savci.java" beforeDir="false" afterPath="$PROJECT_DIR$/Savci.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="ProjectId" id="1XzFzoJKBn6zpZenluBrQeMc7wH" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="flattenPackages" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -88,30 +121,30 @@
     </state>
     <state x="492" y="296" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1280.800@0.0.1280.800" timestamp="1582041367650" />
     <state x="492" y="285" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1280.709@0.23.1280.709" timestamp="1583316295125" />
-    <state width="1238" height="175" key="GridCell.Tab.0.bottom" timestamp="1583345088239">
+    <state width="1238" height="175" key="GridCell.Tab.0.bottom" timestamp="1583430528940">
       <screen x="0" y="23" width="1280" height="709" />
     </state>
-    <state width="1238" height="175" key="GridCell.Tab.0.bottom/0.23.1280.709@0.23.1280.709" timestamp="1583345088239" />
-    <state width="1238" height="175" key="GridCell.Tab.0.center" timestamp="1583345088238">
+    <state width="1238" height="175" key="GridCell.Tab.0.bottom/0.23.1280.709@0.23.1280.709" timestamp="1583430528940" />
+    <state width="1238" height="175" key="GridCell.Tab.0.center" timestamp="1583430528939">
       <screen x="0" y="23" width="1280" height="709" />
     </state>
-    <state width="1238" height="175" key="GridCell.Tab.0.center/0.23.1280.709@0.23.1280.709" timestamp="1583345088238" />
-    <state width="1238" height="175" key="GridCell.Tab.0.left" timestamp="1583345088237">
+    <state width="1238" height="175" key="GridCell.Tab.0.center/0.23.1280.709@0.23.1280.709" timestamp="1583430528939" />
+    <state width="1238" height="175" key="GridCell.Tab.0.left" timestamp="1583430528938">
       <screen x="0" y="23" width="1280" height="709" />
     </state>
-    <state width="1238" height="175" key="GridCell.Tab.0.left/0.23.1280.709@0.23.1280.709" timestamp="1583345088237" />
-    <state width="1238" height="175" key="GridCell.Tab.0.right" timestamp="1583345088238">
+    <state width="1238" height="175" key="GridCell.Tab.0.left/0.23.1280.709@0.23.1280.709" timestamp="1583430528938" />
+    <state width="1238" height="175" key="GridCell.Tab.0.right" timestamp="1583430528940">
       <screen x="0" y="23" width="1280" height="709" />
     </state>
-    <state width="1238" height="175" key="GridCell.Tab.0.right/0.23.1280.709@0.23.1280.709" timestamp="1583345088238" />
-    <state x="128" y="23" key="SettingsEditor" timestamp="1583318694088">
+    <state width="1238" height="175" key="GridCell.Tab.0.right/0.23.1280.709@0.23.1280.709" timestamp="1583430528940" />
+    <state x="128" y="23" key="SettingsEditor" timestamp="1583428309579">
       <screen x="0" y="23" width="1280" height="709" />
     </state>
-    <state x="128" y="23" key="SettingsEditor/0.23.1280.709@0.23.1280.709" timestamp="1583318694088" />
-    <state x="333" y="210" key="com.intellij.ide.util.TipDialog" timestamp="1583318242645">
+    <state x="128" y="23" key="SettingsEditor/0.23.1280.709@0.23.1280.709" timestamp="1583428309579" />
+    <state x="333" y="210" key="com.intellij.ide.util.TipDialog" timestamp="1583410675844">
       <screen x="0" y="23" width="1280" height="709" />
     </state>
-    <state x="333" y="210" key="com.intellij.ide.util.TipDialog/0.23.1280.709@0.23.1280.709" timestamp="1583318242645" />
+    <state x="333" y="210" key="com.intellij.ide.util.TipDialog/0.23.1280.709@0.23.1280.709" timestamp="1583410675844" />
     <state x="69" y="23" key="new project wizard" timestamp="1582042601895">
       <screen x="0" y="23" width="1280" height="709" />
     </state>

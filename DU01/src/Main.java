@@ -15,8 +15,8 @@ public class Main {
         Krysy desaty = new Krysy("BBC", 2, 1, 12);
         Lenochodi jedenacty = new Lenochodi("Jedenacty", 2, 5, 31);
         Lenochodi dvanacty = new Lenochodi("CBA", 2, 12, 11);
-/**
- AAnimal[] vsechny = new AAnimal[12];
+/*
+ Ieat[] vsechny = new Ieat[12];
  vsechny[0] = prvni;
  vsechny[1] = druhy;
  vsechny[2] = treti;
@@ -30,7 +30,7 @@ public class Main {
  vsechny[10] = jedenacty;
  vsechny[11] = dvanacty;
 
- AAnimal[] vejcorody = new AAnimal[8];
+ IlayEggs[] vejcorody = new IlayEggs[8];
  vejcorody[0] = prvni;
  vejcorody[1] = druhy;
  vejcorody[2] = treti;
@@ -40,7 +40,7 @@ public class Main {
  vejcorody[6] = sedmy;
  vejcorody[7] = osmy;
 
- AAnimal[] hlucna = new AAnimal[8];
+ Icry[] hlucna = new Icry[8];
  hlucna[0] = prvni;
  hlucna[1] = druhy;
  hlucna[2] = treti;
@@ -50,43 +50,43 @@ public class Main {
  hlucna[6] = jedenacty;
  hlucna[7] = dvanacty;
 
- Ptaci[] ptaci = new Ptaci[4];
+ ImoveTo[] ptaci = new ImoveTo[4];
  ptaci[0] = prvni;
  ptaci[1] = druhy;
  ptaci[2] = treti;
  ptaci[3] = ctvrty;
 
  //prvni cyklus
- for (AAnimal zvirata: vsechny
+ for (Ieat zvirata: vsechny
  ) {
  zvirata.eat(2);
  }
  //druhy cyklus
- for (Ptaci zviratka: ptaci
+ for (ImoveTo zviratka: ptaci
  ) {
- ((AAnimal)zviratka).moveTo(4,6);
+ zviratka.moveTo(4,6);
  }
  //treti cyklus
- for (AAnimal hlasita: hlucna
+ for (Icry hlasita: hlucna
  ) {
  if(hlasita instanceof Ptaci){
- ((Ptaci) hlasita).cry();
+ hlasita.cry();
  }
  if(hlasita instanceof Savci){
- ((Savci) hlasita).cry();
+ hlasita.cry();
  }
  }
  //ctvrty cyklus
- for (AAnimal vejce: vejcorody
+ for (IlayEggs vejce: vejcorody
  ) {
  if(vejce instanceof Ryby){
- ((Ryby) vejce).layEggs();
+ vejce.layEggs();
  }
  if(vejce instanceof Ptaci){
- ((Ptaci) vejce).layEggs();
+ vejce.layEggs();
  }
  }
- */
+*/
 
         //DU02
         //1
@@ -101,11 +101,11 @@ public class Main {
 
         for (Ptaci posunPtaci : ptaciArrayList
         ) {
-            ((AAnimal) posunPtaci).moveTo(5, 5);
+            posunPtaci.moveTo(5, 5);
         }
 
         //2
-        System.out.println("");
+        System.out.println();
         System.out.println("Druha kolekce:");
         ArrayList<AAnimal> ruznaZvirata = new ArrayList<>(6);
         ruznaZvirata.add(prvni);
@@ -131,7 +131,7 @@ public class Main {
         System.out.println("Druhý prvek je pták: " + druhyPrvekJePtak);
 
         //3
-        System.out.println("");
+        System.out.println();
         System.out.println("Třetí kolekce:");
         ArrayList<Savci> pouzeSavci = new ArrayList<>(6);
         pouzeSavci.add(devaty);
@@ -145,13 +145,13 @@ public class Main {
         ) {
             System.out.print(((AAnimal) jenSavci).getName() + ", ");
         }
-        System.out.println("");
+        System.out.println();
 
         ArrayList<Character> chary = new ArrayList<>();
         chary.add('a');
         chary.add('b');
         chary.add('c');
-        System.out.println("");
+        System.out.println();
 
         pouzeSavci.stream().filter(savci -> {
             for (char c : ((AAnimal) savci).getName().toCharArray()
@@ -162,7 +162,7 @@ public class Main {
             }
             return true;
         }).forEach(c -> System.out.println(((AAnimal)c).getName()));
-        System.out.println("");
+        System.out.println();
         System.out.println("S vetsi energii nez 3");
 
         pouzeSavci.stream().filter(savci -> {
@@ -175,7 +175,7 @@ public class Main {
         }).forEach(c->System.out.println(((AAnimal)c).getName()));
 
         //4
-        System.out.println("");
+        System.out.println();
         System.out.println("Ctvrta kolekce:");
         ArrayList<Ptaci> jenomPtaci = new ArrayList<>();
         jenomPtaci.add(prvni);
@@ -213,7 +213,7 @@ public class Main {
 
 
         //5
-        System.out.println("");
+        System.out.println();
         System.out.println("Pata kolekce: ");
         ArrayList<String> listJmen = new ArrayList<>();
         listJmen.add("BlaBla");
@@ -227,8 +227,8 @@ public class Main {
              ) {
             System.out.print(pouzeJmena+ " ");
         }
-        System.out.println("");
-        System.out.println("");
+        System.out.println();
+        System.out.println();
         System.out.println("Serazena:");
 
         Collections.sort(listJmen);
@@ -236,13 +236,75 @@ public class Main {
              ) {
             System.out.println(serazenaJmena);
         }
-        System.out.println("");
+        System.out.println();
         System.out.println("Nahodne prohazena: ");
         Collections.shuffle(listJmen);
         for (String prohazenaJmena: listJmen
              ) {
             System.out.println(prohazenaJmena);
         }
+
+        System.out.println();
+        System.out.println("Vzestupne:");
+        listJmen.stream()
+                .sorted((jmeno1,jmeno2)->{
+                    if(jmeno1.length() == jmeno2.length()){
+                        return 0;
+                    }
+                    if(jmeno1.length()>jmeno2.length()){
+                        return 1;
+                    } else {return -1;}
+                })
+                .forEach(list -> System.out.println(list));
+
+        System.out.println();
+        System.out.println("Sestupne:");
+        listJmen.stream()
+                .sorted((jmeno1,jmeno2)->{
+                    if(jmeno1.length() == jmeno2.length()){
+                        return 0;
+                    }
+                    if(jmeno1.length()>jmeno2.length()){
+                        return -1;
+                    } else {return 1;}
+                })
+                .forEach(list -> System.out.println(list));
+
+        //6
+        System.out.println();
+        System.out.println("Sesta kolekce:");
+        ArrayList<Ryby> poleRyb = new ArrayList<>();
+        poleRyb.add(paty);
+        poleRyb.add(sesty);
+        poleRyb.add(sedmy);
+        poleRyb.add(osmy);
+        poleRyb.add(new Barakudy("novaBarakuda",2,2,12));
+        poleRyb.add(new Kapri("kaprZkouskaJmena",4,3,54));
+
+        System.out.println("Pouze vypis:");
+        for (Ryby vypisRyb: poleRyb
+             ) {
+            System.out.println(((AAnimal)vypisRyb).getName());
+        }
+        System.out.println();
+        ArrayList<Ryby> kopiePoleRyb = new ArrayList<>(poleRyb);
+        System.out.println("Vypis kopie:");
+        for (Ryby kopiePouzeRyb: kopiePoleRyb
+             ) {
+            System.out.println(((AAnimal)kopiePouzeRyb).getName());
+        }
+        poleRyb.add(3,new Kapri("novejPridanejKapr",4,2,12));
+        System.out.println();
+
+        System.out.println("Struktura bez barakud:");
+        poleRyb.removeIf(o -> o instanceof Barakudy);
+        for (Ryby bezBarakud:poleRyb
+             ) {
+            System.out.println(bezBarakud.getClass());
+        }
+
     }
+
+
 
 }
