@@ -36,9 +36,13 @@ public class DU03 extends Application{
         list.add(b5);
 
         //Pomoci vnitrni anonymni tridy
-        b1.setOnAction(new EventHandler<ActionEvent>() {
+        b1.setOnAction(new EventHandler<>() {
             public void handle(ActionEvent actionEvent) {
-                platno.getChildren().addAll(b2,b3,b4,b5);
+                if (platno.getChildren().containsAll(list)) {
+
+                } else {
+                    platno.getChildren().addAll(b2, b3, b4, b5);
+                }
             }
         });
 
