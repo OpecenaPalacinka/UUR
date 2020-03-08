@@ -2,12 +2,14 @@
   <artifact type="jar" name="DU03">
     <output-path>$PROJECT_DIR$/out/artifacts/DU03</output-path>
     <root id="archive" name="DU03.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
       <element id="directory" name="src">
         <element id="module-source" name="DU03" />
       </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-      </element>
+      <element id="module-output" name="DU03" />
+      <element id="library" level="project" name="lib" />
     </root>
   </artifact>
 </component>
