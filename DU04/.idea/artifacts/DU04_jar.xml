@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DU04:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DU04_jar</output-path>
+    <root id="archive" name="DU04.jar">
+      <element id="module-output" name="DU04" />
+      <element id="directory" name="src">
+        <element id="module-source" name="DU04" />
+      </element>
+    </root>
+  </artifact>
+</component>

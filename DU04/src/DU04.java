@@ -19,6 +19,7 @@ public class DU04 extends Application {
     public void start(Stage stage) throws Exception {
         Scene scene = new Scene(createRootPane());
         stage.setScene(scene);
+        stage.setTitle("Program na ovládání robota");
         stage.show();
     }
 
@@ -35,7 +36,35 @@ public class DU04 extends Application {
     }
 
     private Node createBottom(){
-        FlowPane napisy = new FlowPane();
+        GridPane napisy = new GridPane();
+        Label popisek1 = new Label("Stav baterie");
+        Label popisek2 = new Label("Ujete metry");
+        Label popisek3 = new Label("Doba od aktivace");
+        Label popisek4 = new Label("Zapnutý nebo vypnutý");
+        popisek1.setPadding(new Insets(7));
+        popisek2.setPadding(new Insets(7));
+        popisek3.setPadding(new Insets(7));
+        popisek4.setPadding(new Insets(7));
+
+        TextArea text1 = new TextArea();
+        TextArea text2 = new TextArea();
+        TextArea text3 = new TextArea();
+        TextArea text4 = new TextArea();
+        text1.setText("Procenta baterie%");
+        text2.setText("Ujeté metry");
+        text3.setText("Doba zapnutí");
+        text4.setText("Zapnutý/Vypnutý");
+
+
+        napisy.add(popisek1,0,0);
+        napisy.add(popisek2,1,0);
+        napisy.add(popisek3,2,0);
+        napisy.add(popisek4,3,0);
+        napisy.add(text1,0,1);
+        napisy.add(text2,1,1);
+        napisy.add(text3,2,1);
+        napisy.add(text4,3,1);
+        napisy.setAlignment(Pos.CENTER);
 
 
         return napisy;
@@ -45,6 +74,8 @@ public class DU04 extends Application {
         VBox controlPane = new VBox();
         FlowPane buttons = new FlowPane();
         VBox textArea = new VBox();
+        FlowPane infoASipky = new FlowPane();
+        VBox psanicko = new VBox();
         GridPane sipky = new GridPane();
 
         RadioButton onBtn = new RadioButton("Zapnuti zarizeni");
@@ -63,6 +94,15 @@ public class DU04 extends Application {
         textArea1.setText("Tady se vypisuje aktualni stav robota...");
         textArea.getChildren().addAll(textArea1);
         textArea.setAlignment(Pos.CENTER);
+        textArea.setPrefHeight(300);
+
+        TextArea info = new TextArea();
+        Label popisek = new Label("Vypis pohybu");
+        info.setText("Sem se vypisuje natoceni a rychlost...");
+        info.setPrefSize(250,100);
+        popisek.setPadding(new Insets(5));
+        psanicko.getChildren().addAll(popisek,info);
+        psanicko.setAlignment(Pos.BOTTOM_LEFT);
 
 
         Button nahoru = new Button("↑");
@@ -74,11 +114,18 @@ public class DU04 extends Application {
         sipky.add(doleva,0,1);
         sipky.add(dolu,1,1);
         sipky.add(doprava,2,1);
-        sipky.setAlignment(Pos.CENTER);
+        sipky.setAlignment(Pos.BOTTOM_RIGHT);
         sipky.setPadding(new Insets(20));
+        nahoru.setPrefSize(50,50);
+        dolu.setPrefSize(50,50);
+        doleva.setPrefSize(50,50);
+        doprava.setPrefSize(50,50);
 
+        infoASipky.getChildren().addAll(psanicko,sipky);
+        infoASipky.setAlignment(Pos.BOTTOM_CENTER);
+        infoASipky.setHgap(250);
 
-       controlPane.getChildren().addAll(buttons,textArea,sipky);
+       controlPane.getChildren().addAll(buttons,textArea,infoASipky);
         return controlPane;
     }
 
