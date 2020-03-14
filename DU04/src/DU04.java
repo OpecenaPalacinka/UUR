@@ -1,4 +1,3 @@
-package src;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -109,7 +108,7 @@ public class DU04 extends Application {
 
         Button nahoru = new Button("↑");
         Button dolu = new Button("↓");
-        Button doleva = new Button("�?");
+        Button doleva = new Button("←");
         Button doprava = new Button("→");
 
         sipky.add(nahoru,1,0);
