@@ -19,6 +19,15 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.paint.Color;
 
+/**
+ * Při opravě textové pole při zadání větší hodnoty než 255 si vůbec nevím rady. Zkusil jsem přidat do data modelu
+ * k listenerům podmínku, která ovšem funguje tak že při zadání hodnoty 400 si myslí že jsem zadal 40.
+ * Potom jsem zkusil přidat metodu textProperty k textFieldům, třemi způsoby ale vždy se mi nějakým způsobem
+ * povedlo vyhodit vyjímku. Proto bych nejspíš použil metodu setEditable(false) aby uživatel nemohl editovat textové pole
+ * (tyto metody u textFieldů mám zakomentované)
+ *
+ * @author Jan Pelikán
+ */
 public class Main extends Application {
 
     private RGBDataModel model = new RGBDataModel(0,0,0);
@@ -31,6 +40,8 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         stage.setScene(new Scene(getRoot()));
         stage.setTitle("RGB čtverec");
+        stage.setMinHeight(190);
+        stage.setMinWidth(480);
         stage.show();
     }
 
@@ -54,6 +65,15 @@ public class Main extends Application {
         s1.valueProperty().bindBidirectional(model.rProperty());
 
         TextField tf1 = new TextField();
+     //   tf1.setEditable(false);
+        tf1.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                if (Integer.parseInt(newValue) > 255) {
+                    tf1.setText(String.valueOf(Integer.parseInt("255")));
+                }
+            }
+        });
         tf1.textProperty().bindBidirectional(model.rProperty(), new NumberStringConverter());
         box1.getChildren().addAll(l1,s1, tf1);
 
@@ -69,6 +89,15 @@ public class Main extends Application {
         s2.valueProperty().bindBidirectional(model.gProperty());
 
         TextField tf2 = new TextField();
+    //    tf2.setEditable(false);
+        tf2.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                if (Integer.parseInt(newValue) > 255) {
+                    tf2.setText(String.valueOf(Integer.parseInt("255")));
+                }
+            }
+        });
         tf2.textProperty().bindBidirectional(model.gProperty(), new NumberStringConverter());
         box2.getChildren().addAll(l2,s2, tf2);
 
@@ -84,6 +113,15 @@ public class Main extends Application {
         s3.valueProperty().bindBidirectional(model.bProperty());
 
         TextField tf3 = new TextField();
+      //  tf3.setEditable(false);
+        tf3.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                if (Integer.parseInt(newValue) > 255) {
+                    tf3.setText("255");
+                }
+            }
+        });
         tf3.textProperty().bindBidirectional(model.bProperty(), new NumberStringConverter());
         box3.getChildren().addAll(l3,s3, tf3);
 
@@ -125,16 +163,24 @@ class RGBDataModel
         color.setValue(new Color(r.get() / MAX, g.get() / MAX, b.get() / MAX, 1));
 
         /* Listener na červenou, pomocí lambda výrazu*/
-        r.addListener((observableValue, number, t1) -> color.setValue(new Color((int) t1 / MAX, color.get().getGreen(), color.get().getBlue(), 1)));
-
+        r.addListener((observableValue, number, t1) -> {
+            if ((int) t1 <= MAX) {
+                color.setValue(new Color((int)t1/MAX, color.get().getGreen(), color.get().getBlue(), 1));
+            }
+        });
         /* Listener na zelenou, pomocí lambda výrazu*/
-        g.addListener((observableValue, number, t1) -> color.setValue(new Color(color.get().getRed(), (int) t1 / MAX, color.get().getBlue(), 1)));
-
+        g.addListener((observableValue, number, t1) -> {
+                    if ((int) t1 <= MAX) {
+                        color.setValue(new Color(color.get().getRed(), (int)t1 /MAX, color.get().getBlue(), 1));
+                    }
+                });
         /* Listener na modrou, pomocí anonymní třídy*/
         b.addListener(new ChangeListener<>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                color.setValue(new Color(color.get().getRed(), color.get().getGreen(), (int) t1 / MAX, 1));
+                if((int)t1 <= MAX) {
+                    color.setValue(new Color(color.get().getRed(), color.get().getGreen(), (int) t1 / MAX, 1));
+                }
             }
         });
     }
