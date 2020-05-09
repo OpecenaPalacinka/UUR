@@ -1,5 +1,4 @@
 import javafx.beans.property.*;
-import javafx.scene.paint.Color;
 
 public class DataModel {
     private StringProperty name;
@@ -7,8 +6,6 @@ public class DataModel {
     private ObjectProperty<Rez> rez;
     private IntegerProperty size;
     private BooleanProperty visibility;
-
-
 
     public DataModel() {
         this.name = new SimpleStringProperty("Name");

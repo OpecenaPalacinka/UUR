@@ -20,9 +20,10 @@ import javafx.util.converter.DefaultStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 
 /**
- * Opravil jsem editovatelnost tabulky, náhled se teď mění se všema změnama.
- * Ovšem sloupec "Náhled" se při přidávání a odebírání prvků chová zvláštně, nepodařilo se mi přijít na důvod proč :(
- *
+ * Vytvořil jsem metodu tryParse, která by měla pomocí try-catch bloku převést String na Int a když vznikne vyjímka
+ * tak vrátit starou hodnotu. Ovšem tato metoda mi nefunguje a nevím proč. Zkusil jsem dát řádku 73-75 do try-catch bloku
+ * předtím než jsem vytvořil metodu tryParse a to také nefungovalo. Mohl by jste mi prosím říct, proč to takto nefunguje?
+ * Děkuji za odpověd :)
  * @author Jan Pelikán
  */
 
@@ -42,11 +43,11 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    private Scene getScene() {
+    private Scene getScene() throws Exception {
         return new Scene(getRoot(), 490, 300);
     }
 
-    private Parent getRoot() {
+    private Parent getRoot() throws Exception {
         VBox vBox = new VBox();
 
         table.setEditable(true);
@@ -68,8 +69,11 @@ public class Main extends Application {
 
         TableColumn<DataModel, Integer> sizeCol = new TableColumn<>("Velikost");
         sizeCol.setCellValueFactory(new PropertyValueFactory<DataModel, Integer>("size"));
-        sizeCol.setCellFactory(column -> new ConsumingTextFieldTableCell<DataModel, Integer>(new IntegerStringConverter()));
-        sizeCol.setOnEditCommit(event -> event.getRowValue().setSize(event.getNewValue()));
+        sizeCol.setCellFactory(column -> new ConsumingTextFieldTableCell<>(new IntegerStringConverter()));
+        sizeCol.setOnEditCommit(event -> {
+                event.getRowValue().setSize(tryParse(String.valueOf(event.getNewValue()),event.getOldValue()));
+        });
+
 
         TableColumn<DataModel, Boolean> visibCol = new TableColumn<>("Viditelnost");
         visibCol.setCellValueFactory(new PropertyValueFactory<DataModel, Boolean>("visibility"));
@@ -110,6 +114,7 @@ public class Main extends Application {
                         }
                     }
         });
+
         nahledCol.setCellValueFactory(value -> new StringBinding() {
             {
                 super.bind(value.getValue().nameProperty(),value.getValue().colorProperty(),value.getValue().rezProperty(),
@@ -136,7 +141,19 @@ public class Main extends Application {
         hBox.setAlignment(Pos.CENTER);
         hBox.getChildren().addAll(info, delete, add);
         vBox.getChildren().addAll(table, info1, hBox);
+
+
         return vBox;
+    }
+
+    public int tryParse(String value, int defaultValue){
+        try {
+            int retur = Integer.parseInt(value);
+            return retur;
+        } catch (NumberFormatException e){
+            System.out.println("Zadali jste neplatný znak, vracím defaultní hodnotu.");
+            return defaultValue;
+        }
     }
 
     private void show(DataModel selectedItem, TextField lInfo) {
@@ -174,4 +191,6 @@ public class Main extends Application {
             this((StringConverter<T>) new DefaultStringConverter());
         }
     }
+
+
 }
