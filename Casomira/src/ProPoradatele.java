@@ -1,6 +1,11 @@
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -14,13 +19,28 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
+import javafx.util.converter.NumberStringConverter;
 
 import java.awt.*;
 
 public class ProPoradatele extends Application {
+    TableView<Hrac1> table1 = new TableView<>();
+    TableView<Hrac2> table2 = new TableView<>();
+    private Tym1 tym1 = new Tym1();
+    private Tym2 tym2 = new Tym2();
+    private Hrac1 hrac1 = new Hrac1(0,"Nekdo Nekdo");
+    private Hrac2 hrac2 = new Hrac2(0, "Nekdo Nekdo");
+    int minCislo = 1;
+    int maxCislo = 99;
+    Image image = new Image("micek.jpg");
+    ImageView imageView = new ImageView(image);
 
     public static void main(String[] args) {
 	launch(args);
@@ -31,9 +51,10 @@ public class ProPoradatele extends Application {
         Scene scene = new Scene(createRootPane());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Časomíra");
+        primaryStage.getIcons().add(image);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        primaryStage.setMinWidth(dimension.getWidth());
-        primaryStage.setMinHeight(dimension.getHeight());
+        primaryStage.setMinWidth(dimension.getWidth()-200);
+        primaryStage.setMinHeight(dimension.getHeight()-100);
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
@@ -58,12 +79,28 @@ public class ProPoradatele extends Application {
         pocetGolu.setFont(new Font("Calibri",20));
 
         TextField tymSkore2 = new TextField();
-        tymSkore2.setText("0");
-        tymSkore2.setEditable(false);
+        tymSkore2.setFont(new Font(16));
+        tymSkore2.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if (!t1.matches("\\d*")) {
+                    tymSkore2.setText(t1.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        tymSkore2.textProperty().bindBidirectional(tym2.pocetGoluProperty(),new NumberStringConverter());
         tymSkore2.setMaxSize(50,100);
 
         Button skorePlus2 = new Button("+");
+        skorePlus2.setOnAction(actionEvent -> tym2.setPocetGolu(tym2.getPocetGolu()+1));
         Button skoreMinus2 = new Button("-");
+        skoreMinus2.setOnAction(actionEvent -> {
+            if(tym2.getPocetGolu()-1<0){
+                tym2.setPocetGolu(0);
+            } else {
+                tym2.setPocetGolu(tym2.getPocetGolu()-1);
+            }
+        });
         buttonyPlusMinus.setSpacing(15);
         skoreMinus2.setFont(new Font(14));
 
@@ -72,29 +109,52 @@ public class ProPoradatele extends Application {
         buttonyPlusMinus.getChildren().addAll(skorePlus2,skoreMinus2);
         skoreAButtony.getChildren().addAll(tymSkore2,buttonyPlusMinus);
 
-        TextArea tym2 = new TextArea();
-        tym2.setText("Jmeno tymu2");
-        tym2.setMinSize(200,30);
-        tym2.setMaxSize(200,30);
+        TextField tym2TF = new TextField();
+        tym2TF.setText("Jmeno tymu2");
+        tym2TF.setOnAction(actionEvent -> tym2.setJmenoTymu(tym2TF.toString()));
+        tym2TF.setMinSize(200,30);
+        tym2TF.setMaxSize(200,30);
 
-        TextArea tymSoupiska2 = new TextArea();
-        tymSoupiska2.setText("Soupiska tymu 2");
-        tymSoupiska2.setMinSize(300,500);
-        tymSoupiska2.setMaxSize(300,500);
+        table2.setEditable(false);
+        table2.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        table2.setMinSize(300,500);
+        table2.setMaxSize(300,500);
+
+        TableColumn<Hrac2,Integer> cisloCol = new TableColumn<>("Číslo hráče");
+        cisloCol.setCellValueFactory(new PropertyValueFactory<>("cisloHrace"));
+
+        TableColumn<Hrac2,String> jmenoCol = new TableColumn<>("Jméno hráče");
+        jmenoCol.setCellValueFactory(new PropertyValueFactory<>("jmenoHrace"));
 
         GridPane pridani = new GridPane();
         Label pridaniLabelCislo = new Label("Číslo:");
         Label pridaniLabelJmeno = new Label("Jméno hráče:");
         TextField pridaniCislo = new TextField();
+        pridaniCislo.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    pridaniCislo.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
         pridaniCislo.setMinSize(35,30);
         pridaniCislo.setMaxSize(35,30);
         TextField pridaniJmeno = new TextField();
         pridaniJmeno.setMinSize(150,30);
         pridaniJmeno.setMaxSize(150,30);
         Button addBT = new Button("Přidat");
+        addBT.setOnAction(actionEvent -> {
+            Hrac2 novyHrac = new Hrac2(Integer.parseInt(pridaniCislo.getText()),pridaniJmeno.getText());
+            table2.getItems().add(novyHrac);
+        });
+
         addBT.setMinSize(100,30);
         addBT.setMaxSize(100,30);
         Button removeBT = new Button("Odstranit");
+        removeBT.setOnAction(actionEvent -> delete2());
+
         removeBT.setMinSize(100,30);
         removeBT.setMaxSize(100,30);
         pridani.add(pridaniLabelCislo, 0, 0);
@@ -111,7 +171,7 @@ public class ProPoradatele extends Application {
         pravaLista.setSpacing(25);
         pravaLista.setPadding(new Insets(25,85,0,0));
         pravaLista.setAlignment(Pos.TOP_CENTER);
-        pravaLista.getChildren().addAll(pocetGolu,skoreAButtony,tym2, tymSoupiska2,pridani);
+        pravaLista.getChildren().addAll(pocetGolu,skoreAButtony,tym2TF, table2,pridani);
         return pravaLista;
     }
 
@@ -149,9 +209,17 @@ public class ProPoradatele extends Application {
         cas.setAlignment(Pos.TOP_CENTER);
         cas.setText("Aktualni cas");
 
-        Button startStop = new Button("Start");
-        startStop.setMinSize(200,50);
-        startStop.setMaxSize(200,50);
+        FlowPane startStop = new FlowPane();
+        Button start = new Button("Start");
+        start.setMinSize(150,50);
+        start.setMaxSize(150,50);
+
+        Button stop = new Button("Stop");
+        stop.setMinSize(150,50);
+        stop.setMaxSize(150,50);
+        startStop.setHgap(25);
+        startStop.setAlignment(Pos.CENTER);
+        startStop.getChildren().addAll(start,stop);
 
         casBox.setSpacing(35);
         casBox.setAlignment(Pos.CENTER);
@@ -233,11 +301,28 @@ public class ProPoradatele extends Application {
         pocetGolu.setFont(new Font("Calibri",20));
 
         TextField tymSkore1 = new TextField();
-        tymSkore1.setText("0");
-        tymSkore1.setEditable(false);
+        tymSkore1.setFont(new Font(16));
+        tymSkore1.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if (!t1.matches("\\d*")) {
+                    tymSkore1.setText(t1.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        tymSkore1.textProperty().bindBidirectional(tym1.pocetGoluProperty(),new NumberStringConverter());
         tymSkore1.setMaxSize(50,100);
+
         Button skorePlus1 = new Button("+");
+        skorePlus1.setOnAction(actionEvent -> tym1.setPocetGolu(tym1.getPocetGolu()+1));
         Button skoreMinus1 = new Button("-");
+        skoreMinus1.setOnAction(actionEvent -> {
+            if(tym1.getPocetGolu()-1<0){
+                tym1.setPocetGolu(0);
+            } else {
+                tym1.setPocetGolu(tym1.getPocetGolu()-1);
+            }
+        });
         buttony.setSpacing(15);
         skoreMinus1.setFont(new Font(14));
 
@@ -246,20 +331,31 @@ public class ProPoradatele extends Application {
         buttony.getChildren().addAll(skorePlus1,skoreMinus1);
         skoreAButtony.getChildren().addAll(tymSkore1,buttony);
 
-        TextArea tym1 = new TextArea();
-        tym1.setText("Jmeno tymu1");
-        tym1.setMinSize(200,30);
-        tym1.setMaxSize(200,30);
+        TextArea tym1TF = new TextArea();
+        tym1TF.setText("Jmeno tymu1");
+        tym1TF.setMinSize(200,30);
+        tym1TF.setMaxSize(200,30);
 
-        TextArea tymSoupiska1 = new TextArea();
-        tymSoupiska1.setText("Soupiska tymu 1");
-        tymSoupiska1.setMinSize(300,500);
-        tymSoupiska1.setMaxSize(300,500);
+        table1.setEditable(false);
+        table1.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        TableColumn<Tym1,Integer> cisloCol = new TableColumn<>("Číslo hráče");
+        TableColumn<Tym1,String> jmenoCol = new TableColumn<>("Jméno hráče");
+        table1.setMinSize(300,500);
+        table1.setMaxSize(300,500);
 
         GridPane pridani = new GridPane();
         Label pridaniLabelCislo = new Label("Číslo:");
         Label pridaniLabelJmeno = new Label("Jméno hráče:");
         TextField pridaniCislo = new TextField();
+        pridaniCislo.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    pridaniCislo.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
         pridaniCislo.setMinSize(35,30);
         pridaniCislo.setMaxSize(35,30);
         TextField pridaniJmeno = new TextField();
@@ -285,7 +381,7 @@ public class ProPoradatele extends Application {
         levaLista.setSpacing(25);
         levaLista.setPadding(new Insets(25,0,0,85));
         levaLista.setAlignment(Pos.TOP_CENTER);
-        levaLista.getChildren().addAll(pocetGolu,skoreAButtony,tym1, tymSoupiska1,pridani);
+        levaLista.getChildren().addAll(pocetGolu,skoreAButtony,tym1TF, table1,pridani);
         return levaLista;
     }
 
@@ -298,7 +394,6 @@ public class ProPoradatele extends Application {
         MenuItem restartZapas = new MenuItem("Restartovat zápas");
         MenuItem ulozitZapas = new MenuItem("Uložit zápas");
         MenuItem historie = new MenuItem("Historie zápasů");
-        //Pridani funkci tlacitkum
 
         insertMenu.getItems().addAll(novejZapas,restartZapas,ulozitZapas);
         hraMenu.getItems().addAll(insertMenu,historie);
@@ -308,12 +403,41 @@ public class ProPoradatele extends Application {
         MenuItem napoveda = new MenuItem("Nápověda");
         MenuItem ukoncit = new MenuItem("Ukončení aplikace");
         //Pridani funkci tlacitkum
-        ukoncit.setOnAction(actionEvent -> Platform.exit());
         proDivaky.setOnAction(actionEvent -> new ProDivaky());
+        napoveda.setOnAction(actionEvent -> vypsaniNapovedy());
+        ukoncit.setOnAction(actionEvent -> Platform.exit());
 
         nastroje.getItems().addAll(proDivaky,napoveda,ukoncit);
 
         menuBar.getMenus().addAll(nastroje,hraMenu);
         return menuBar;
     }
+
+    private void vypsaniNapovedy(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Nápověda");
+        alert.setHeaderText("Nápověda na ovládání");
+        alert.setContentText("Jako první doporučuji vyplnit jména obou týmů, kolonky najdete po stranách" +
+                " uprostřed, dále doporučuji vyplnit soupisky obou týmů a to se dělá přes přidávací lištu" +
+                " postranách v dolní části obrazovky, každá lišta je pro jeden tým. Pokud chcete zadat timeout " +
+                "stačí zakliknout checkbox na straně daného týmu. K přiřazení vyloučení se používá dolní lišta uprostřed" +
+                " nejdřív vyberete tým který bude vyloučený, poté hráče a pak dobu trestu. Okno pro diváky se otvírá " +
+                "v menu, kde kliknete na první záložku a poté vyberete možnost \"Zobrazení pro diváky\".");
+        imageView.setFitWidth(50);
+        imageView.setFitHeight(50);
+        alert.setGraphic(imageView);
+        alert.showAndWait();
+    }
+
+    private void delete1() {
+        ObservableList<Hrac1> selection = table1.getSelectionModel().getSelectedItems();
+        table1.getItems().removeAll(selection);
+        table1.getSelectionModel().clearSelection();
+    }
+    private void delete2() {
+        ObservableList<Hrac2> selection = table2.getSelectionModel().getSelectedItems();
+        table2.getItems().removeAll(selection);
+        table2.getSelectionModel().clearSelection();
+    }
+
 }
