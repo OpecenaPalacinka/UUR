@@ -37,8 +37,10 @@ public class ProPoradatele extends Application {
     private Tym2 tym2 = new Tym2();
     private Hrac1 hrac1 = new Hrac1(0,"Nekdo Nekdo");
     private Hrac2 hrac2 = new Hrac2(0, "Nekdo Nekdo");
+    private CasATretina casATretina = new CasATretina();
     int minCislo = 1;
     int maxCislo = 99;
+    public int tretina = 0;
     Image image = new Image("micek.jpg");
     ImageView imageView = new ImageView(image);
 
@@ -55,7 +57,6 @@ public class ProPoradatele extends Application {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         primaryStage.setMinWidth(dimension.getWidth()-200);
         primaryStage.setMinHeight(dimension.getHeight()-100);
-        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
@@ -111,6 +112,7 @@ public class ProPoradatele extends Application {
 
         TextField tym2TF = new TextField();
         tym2TF.setText("Jmeno tymu2");
+        tym2TF.textProperty().bindBidirectional(tym2.jmenoTymuProperty());
         tym2TF.setOnAction(actionEvent -> tym2.setJmenoTymu(tym2TF.toString()));
         tym2TF.setMinSize(200,30);
         tym2TF.setMaxSize(200,30);
@@ -175,7 +177,7 @@ public class ProPoradatele extends Application {
         return pravaLista;
     }
 
-    public Node createMid(){
+    public Node createMid() {
         VBox prostredek = new VBox();
         VBox tretina = new VBox();
         VBox casBox = new VBox();
@@ -186,12 +188,28 @@ public class ProPoradatele extends Application {
 
         Label tretinaLabel = new Label("Třetina:");
         TextField tretinaField = new TextField();
-        tretinaField.setEditable(false);
+        tretinaField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    tretinaField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
         tretinaField.setMinSize(75,100);
         tretinaField.setMaxSize(75,100);
         FlowPane tretinaButtony = new FlowPane();
         Button plus = new Button("+");
+        plus.setOnAction(actionEvent -> casATretina.setTretina(casATretina.getTretina()+1));
         Button minus = new Button("-");
+        minus.setOnAction(actionEvent -> {
+            if(casATretina.getTretina()-1<1){
+                casATretina.setTretina(1);
+            } else {
+                casATretina.setTretina(casATretina.getTretina()-1);
+            }
+        });
         minus.setFont(new Font(12));
         tretinaButtony.setHgap(15);
         tretinaButtony.setAlignment(Pos.CENTER);
@@ -331,8 +349,10 @@ public class ProPoradatele extends Application {
         buttony.getChildren().addAll(skorePlus1,skoreMinus1);
         skoreAButtony.getChildren().addAll(tymSkore1,buttony);
 
-        TextArea tym1TF = new TextArea();
+        TextField tym1TF = new TextField();
         tym1TF.setText("Jmeno tymu1");
+        tym1TF.textProperty().bindBidirectional(tym1.jmenoTymuProperty());
+        tym1TF.setOnAction(actionEvent -> tym1.setJmenoTymu(tym1TF.toString()));
         tym1TF.setMinSize(200,30);
         tym1TF.setMaxSize(200,30);
 
