@@ -6,7 +6,7 @@ public class Tym2 {
     private BooleanProperty timeout;
 
     public Tym2(){
-        this.jmenoTymu = new SimpleStringProperty("Jmeno tymu");
+        this.jmenoTymu = new SimpleStringProperty();
         this.pocetGolu = new SimpleIntegerProperty(0);
         this.timeout = new SimpleBooleanProperty(false);
     }

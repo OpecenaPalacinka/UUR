@@ -1,11 +1,7 @@
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -17,30 +13,35 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
+import javafx.util.converter.DefaultStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.NumberStringConverter;
 
-import java.awt.*;
 
 public class ProPoradatele extends Application {
     TableView<Hrac1> table1 = new TableView<>();
     TableView<Hrac2> table2 = new TableView<>();
-    private Tym1 tym1 = new Tym1();
-    private Tym2 tym2 = new Tym2();
-    private Hrac1 hrac1 = new Hrac1(0,"Nekdo Nekdo");
-    private Hrac2 hrac2 = new Hrac2(0, "Nekdo Nekdo");
-    private CasATretina casATretina = new CasATretina();
+    TableView<Hrac1> tableNaVylouceni21 = new TableView<>();
+    TableView<Hrac1> tableNaVylouceni51 = new TableView<>();
+    TableView<Hrac2> tableNaVylouceni22 = new TableView<>();
+    TableView<Hrac2> tableNaVylouceni52 = new TableView<>();
+    public Tym1 tym1 = new Tym1();
+    public Tym2 tym2 = new Tym2();
+    public CasATretina casATretina = new CasATretina();
     int minCislo = 1;
     int maxCislo = 99;
     public int tretina = 0;
+    boolean pomocna = true;
     Image image = new Image("micek.jpg");
     ImageView imageView = new ImageView(image);
 
@@ -79,12 +80,9 @@ public class ProPoradatele extends Application {
 
         TextField tymSkore2 = new TextField();
         tymSkore2.setFont(new Font(16));
-        tymSkore2.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                if (!t1.matches("\\d*")) {
-                    tymSkore2.setText(t1.replaceAll("[^\\d]", ""));
-                }
+        tymSkore2.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                tymSkore2.setText(t1.replaceAll("[^\\d]", ""));
             }
         });
         tymSkore2.textProperty().bindBidirectional(tym2.pocetGoluProperty(),new NumberStringConverter());
@@ -110,7 +108,7 @@ public class ProPoradatele extends Application {
         skoreAButtony.getChildren().addAll(tymSkore2,buttonyPlusMinus);
 
         TextField tym2TF = new TextField();
-        tym2TF.setText("Jmeno tymu2");
+        tym2TF.setPromptText("Jmeno tymu 2");
         tym2TF.textProperty().bindBidirectional(tym2.jmenoTymuProperty());
         tym2TF.setOnAction(actionEvent -> tym2.setJmenoTymu(tym2TF.toString()));
         tym2TF.setMinSize(200,30);
@@ -123,21 +121,24 @@ public class ProPoradatele extends Application {
 
         TableColumn<Hrac2,Integer> cisloCol = new TableColumn<>("Číslo hráče");
         cisloCol.setCellValueFactory(new PropertyValueFactory<>("cisloHrace"));
+        cisloCol.setPrefWidth(65);
+        cisloCol.setCellFactory(column -> new ConsumingTextFieldTableCell<>(new IntegerStringConverter()));
 
         TableColumn<Hrac2,String> jmenoCol = new TableColumn<>("Jméno hráče");
+        jmenoCol.setPrefWidth(133.2);
         jmenoCol.setCellValueFactory(new PropertyValueFactory<>("jmenoHrace"));
+        jmenoCol.setCellFactory(column -> new ConsumingTextFieldTableCell<>());
+
+        //noinspection unchecked
+        table2.getColumns().addAll(cisloCol,jmenoCol);
 
         GridPane pridani = new GridPane();
         Label pridaniLabelCislo = new Label("Číslo:");
         Label pridaniLabelJmeno = new Label("Jméno hráče:");
         TextField pridaniCislo = new TextField();
-        pridaniCislo.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    pridaniCislo.setText(newValue.replaceAll("[^\\d]", ""));
-                }
+        pridaniCislo.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                pridaniCislo.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
         pridaniCislo.setMinSize(35,30);
@@ -147,8 +148,18 @@ public class ProPoradatele extends Application {
         pridaniJmeno.setMaxSize(150,30);
         Button addBT = new Button("Přidat");
         addBT.setOnAction(actionEvent -> {
-            Hrac2 novyHrac = new Hrac2(Integer.parseInt(pridaniCislo.getText()),pridaniJmeno.getText());
-            table2.getItems().add(novyHrac);
+            if(Integer.parseInt(pridaniCislo.getText())<minCislo || Integer.parseInt(pridaniCislo.getText())>maxCislo){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("Špatné číslo");
+                alert.setContentText("Zadejte číslo mezi 1 - 99!");
+                pridaniCislo.setText("");
+                alert.showAndWait();
+            } else {
+                Hrac2 novyHrac = new Hrac2(Integer.parseInt(pridaniCislo.getText()), pridaniJmeno.getText());
+                table2.getItems().add(novyHrac);
+                pridaniCislo.setText("");
+                pridaniJmeno.setText(null);
+            }
         });
 
         addBT.setMinSize(100,30);
@@ -187,13 +198,9 @@ public class ProPoradatele extends Application {
 
         Label tretinaLabel = new Label("Třetina:");
         TextField tretinaField = new TextField();
-        tretinaField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    tretinaField.setText(newValue.replaceAll("[^\\d]", ""));
-                }
+        tretinaField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                tretinaField.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
         tretinaField.setMinSize(60,50);
@@ -209,7 +216,9 @@ public class ProPoradatele extends Application {
                 casATretina.setTretina(casATretina.getTretina()-1);
             }
         });
-        minus.setFont(new Font(12));
+        minus.setFont(new Font(14));
+        minus.setPadding(new Insets(1.5,9,3.5,9));
+
         tretinaButtony.setHgap(15);
         tretinaButtony.setAlignment(Pos.CENTER);
         tretinaButtony.getChildren().addAll(plus,minus);
@@ -228,10 +237,12 @@ public class ProPoradatele extends Application {
 
         FlowPane startStop = new FlowPane();
         Button start = new Button("Start");
+        start.setFont(new Font(17));
         start.setMinSize(125,50);
         start.setMaxSize(125,50);
 
         Button stop = new Button("Stop");
+        stop.setFont(new Font(17));
         stop.setMinSize(125,50);
         stop.setMaxSize(125,50);
         startStop.setHgap(25);
@@ -245,52 +256,177 @@ public class ProPoradatele extends Application {
         horniBox.getChildren().addAll(tretina,casBox);
 
         CheckBox timeoutTym1 = new CheckBox();
+        timeoutTym1.setOnAction(actionEvent -> tym1.setTimeout(true));
         Label timeout = new Label("Timeout");
         CheckBox timeoutTym2 = new CheckBox();
+        timeoutTym2.setOnAction(actionEvent -> tym2.setTimeout(true));
         timeouty.setAlignment(Pos.CENTER);
         timeouty.setSpacing(150);
         timeouty.getChildren().addAll(timeoutTym1,timeout,timeoutTym2);
 
-        TextArea vylouceni21 = new TextArea();
+        tableNaVylouceni21.setEditable(false);
+        tableNaVylouceni21.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        TableColumn<Hrac1,Integer> cisloCol21 = new TableColumn<>("Číslo hráče");
+        cisloCol21.setPrefWidth(65);
+        cisloCol21.setCellValueFactory(new PropertyValueFactory<>("cisloHrace"));
+        cisloCol21.setCellFactory(column -> new ConsumingTextFieldTableCell<>(new IntegerStringConverter()));
+
+        TableColumn<Hrac1,String> casCol21 = new TableColumn<>("Doba vyloučení");
+        casCol21.setPrefWidth(133.2);
+
+        //noinspection unchecked
+        tableNaVylouceni21.getColumns().addAll(cisloCol21,casCol21);
+
         Label vylouceni2 = new Label("Vyloučení na 2 minuty");
-        TextArea vyloceni22 = new TextArea();
+
+        tableNaVylouceni22.setEditable(false);
+        tableNaVylouceni22.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        TableColumn<Hrac2,Integer> cisloCol22 = new TableColumn<>("Číslo hráče");
+        cisloCol22.setPrefWidth(65);
+        cisloCol22.setCellValueFactory(new PropertyValueFactory<>("cisloHrace"));
+        cisloCol22.setCellFactory(column -> new ConsumingTextFieldTableCell<>(new IntegerStringConverter()));
+
+        TableColumn<Hrac2,String> casCol22 = new TableColumn<>("Doba vyloučení");
+        casCol22.setPrefWidth(133.2);
+
+        //noinspection unchecked
+        tableNaVylouceni22.getColumns().addAll(cisloCol22,casCol22);
+
+
         vylouceniNa2.setAlignment(Pos.CENTER);
         vylouceniNa2.setSpacing(50);
-        vylouceni21.setMinSize(200,85);
-        vylouceni21.setMaxSize(200,85);
-        vyloceni22.setMinSize(200,85);
-        vyloceni22.setMaxSize(200,85);
-        vylouceniNa2.getChildren().addAll(vylouceni21,vylouceni2,vyloceni22);
+        tableNaVylouceni21.setMinSize(200,85);
+        tableNaVylouceni21.setMaxSize(200,85);
+        tableNaVylouceni22.setMinSize(200,85);
+        tableNaVylouceni22.setMaxSize(200,85);
+        vylouceniNa2.getChildren().addAll(tableNaVylouceni21,vylouceni2,tableNaVylouceni22);
 
-        TextArea vylouceni51 = new TextArea();
+
+        tableNaVylouceni51.setEditable(false);
+        tableNaVylouceni51.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        TableColumn<Hrac1,Integer> cisloCol51 = new TableColumn<>("Číslo hráče");
+        cisloCol51.setPrefWidth(65);
+        cisloCol51.setCellValueFactory(new PropertyValueFactory<>("cisloHrace"));
+        cisloCol51.setCellFactory(column -> new ConsumingTextFieldTableCell<>(new IntegerStringConverter()));
+
+        TableColumn<Hrac1,String> casCol51 = new TableColumn<>("Doba vyloučení");
+        casCol51.setPrefWidth(133.2);
+
+        //noinspection unchecked
+        tableNaVylouceni51.getColumns().addAll(cisloCol51,casCol51);
+
         Label vylouceni5 = new Label("Vyloučení na 5 minut");
-        TextArea vylouceni52 = new TextArea();
+
+        tableNaVylouceni52.setEditable(false);
+        tableNaVylouceni52.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        TableColumn<Hrac2,Integer> cisloCol52 = new TableColumn<>("Číslo hráče");
+        cisloCol52.setPrefWidth(65);
+        cisloCol52.setCellValueFactory(new PropertyValueFactory<>("cisloHrace"));
+        cisloCol52.setCellFactory(column -> new ConsumingTextFieldTableCell<>(new IntegerStringConverter()));
+
+        TableColumn<Hrac2,String> casCol52 = new TableColumn<>("Doba vyloučení");
+        casCol52.setPrefWidth(133.2);
+
+        //noinspection unchecked
+        tableNaVylouceni52.getColumns().addAll(cisloCol52,casCol52);
+
         vylouceniNa5.setAlignment(Pos.CENTER);
         vylouceniNa5.setSpacing(50);
-        vylouceni51.setMinSize(200,85);
-        vylouceni51.setMaxSize(200,85);
-        vylouceni52.setMinSize(200,85);
-        vylouceni52.setMaxSize(200,85);
-        vylouceniNa5.getChildren().addAll(vylouceni51,vylouceni5,vylouceni52);
+        tableNaVylouceni51.setMinSize(200,85);
+        tableNaVylouceni51.setMaxSize(200,85);
+        tableNaVylouceni52.setMinSize(200,85);
+        tableNaVylouceni52.setMaxSize(200,85);
+        vylouceniNa5.getChildren().addAll(tableNaVylouceni51,vylouceni5,tableNaVylouceni52);
 
         GridPane pridani = new GridPane();
         Label pridaniLabelTym = new Label("Tým:");
         Label pridaniLabelCislo = new Label("Číslo hráče:");
         Label pridaniLabelVylouceni = new Label("Doba vylouceni:");
-        TextField pridaniTym = new TextField("ChoiceBox");
-        pridaniTym.setMinSize(35,30);
-        pridaniTym.setMaxSize(35,30);
+        ChoiceBox<CisloTymu> tymChoice = new ChoiceBox<>(FXCollections.observableArrayList(CisloTymu.values()));
+        tymChoice.setMinSize(65,30);
+        tymChoice.setMaxSize(65,30);
+
         TextField pridaniCislo = new TextField();
-        pridaniCislo.setMinSize(150,30);
-        pridaniCislo.setMaxSize(150,30);
+        pridaniCislo.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                pridaniCislo.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+        pridaniCislo.setMinSize(100,30);
+        pridaniCislo.setMaxSize(100,30);
         ChoiceBox<TypVylouceni> vylouceniTyp = new ChoiceBox<>(FXCollections.observableArrayList(TypVylouceni.values()));
         vylouceniTyp.setMinSize(80,30);
         vylouceniTyp.setMaxSize(80,30);
         Button addBT = new Button("Přidat");
+        addBT.setOnAction(actionEvent -> {
+            try {
+                switch (tymChoice.getValue()) {
+                    case Tym1:
+                        for (Hrac1 hraci: table1.getItems()
+                        ) {
+                            if(hraci.getCisloHrace() == Integer.parseInt(pridaniCislo.getText())){
+                                if (vylouceniTyp.getValue() == TypVylouceni.DVE) {
+                                    tableNaVylouceni21.getItems().addAll(hraci);
+                                    pomocna = false;
+                                    break;
+                                }
+                                if(vylouceniTyp.getValue() == TypVylouceni.PET){
+                                    tableNaVylouceni51.getItems().addAll(hraci);
+                                    pomocna = false;
+                                    break;
+                                }
+                            }
+                        }
+                        if(pomocna){
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setTitle("Varování");
+                            alert.setHeaderText("Špatné číslo");
+                            alert.setContentText("Zadali jste číslo, které není na soupisce \"Týmu 1\"");
+                            alert.showAndWait();
+                        }
+
+                        break;
+                    case Tym2:
+                        for (Hrac2 hraci: table2.getItems()
+                        ) {
+                            if (hraci.getCisloHrace() == Integer.parseInt(pridaniCislo.getText())) {
+                                 if (vylouceniTyp.getValue() == TypVylouceni.DVE) {
+                                    tableNaVylouceni22.getItems().addAll(hraci);
+                                    pomocna = false;
+                                    break;
+                                 }
+                                 if (vylouceniTyp.getValue() == TypVylouceni.PET){
+                                     tableNaVylouceni52.getItems().addAll(hraci);
+                                     pomocna = false;
+                                     break;
+                                 }
+                            }
+                        }
+                        if(pomocna){
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setTitle("Varování");
+                            alert.setHeaderText("Špatné číslo");
+                            alert.setContentText("Zadali jste číslo, které není na soupisce \"Týmu 2\"");
+                            alert.showAndWait();
+                        }
+                        break;
+                }
+            }
+            catch (Exception e){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Varování");
+                alert.setHeaderText("Tým/Doba vyloučení");
+                alert.setContentText("Vyberte tým nebo dobu vyloučení!");
+                alert.showAndWait();
+            }
+
+        });
+
         addBT.setMinSize(100,30);
         addBT.setMaxSize(100,30);
         pridani.add(pridaniLabelTym, 0, 0);
-        pridani.add(pridaniTym,0,1);
+        pridani.add(tymChoice,0,1);
         pridani.add(pridaniLabelCislo,1,0);
         pridani.add(pridaniCislo,1,1);
         pridani.add(pridaniLabelVylouceni,2,0);
@@ -319,12 +455,9 @@ public class ProPoradatele extends Application {
 
         TextField tymSkore1 = new TextField();
         tymSkore1.setFont(new Font(16));
-        tymSkore1.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                if (!t1.matches("\\d*")) {
-                    tymSkore1.setText(t1.replaceAll("[^\\d]", ""));
-                }
+        tymSkore1.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                tymSkore1.setText(t1.replaceAll("[^\\d]", ""));
             }
         });
         tymSkore1.textProperty().bindBidirectional(tym1.pocetGoluProperty(),new NumberStringConverter());
@@ -350,7 +483,7 @@ public class ProPoradatele extends Application {
         skoreAButtony.getChildren().addAll(tymSkore1,buttony);
 
         TextField tym1TF = new TextField();
-        tym1TF.setText("Jmeno tymu1");
+        tym1TF.setPromptText("Jmeno tymu 1");
         tym1TF.textProperty().bindBidirectional(tym1.jmenoTymuProperty());
         tym1TF.setOnAction(actionEvent -> tym1.setJmenoTymu(tym1TF.toString()));
         tym1TF.setMinSize(200,30);
@@ -358,22 +491,30 @@ public class ProPoradatele extends Application {
 
         table1.setEditable(false);
         table1.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        TableColumn<Tym1,Integer> cisloCol = new TableColumn<>("Číslo hráče");
-        TableColumn<Tym1,String> jmenoCol = new TableColumn<>("Jméno hráče");
+
+        TableColumn<Hrac1,Integer> cisloCol = new TableColumn<>("Číslo hráče");
+        cisloCol.setPrefWidth(65);
+        cisloCol.setCellValueFactory(new PropertyValueFactory<>("cisloHrace"));
+        cisloCol.setCellFactory(column -> new ConsumingTextFieldTableCell<>(new IntegerStringConverter()));
+
+        TableColumn<Hrac1,String> jmenoCol = new TableColumn<>("Jméno hráče");
+        jmenoCol.setPrefWidth(133.2);
+        jmenoCol.setCellValueFactory(new PropertyValueFactory<>("jmenoHrace"));
+        jmenoCol.setCellFactory(column -> new ConsumingTextFieldTableCell<>());
+
         table1.setMinSize(200,325);
         table1.setMaxSize(200,325);
+
+        //noinspection unchecked
+        table1.getColumns().addAll(cisloCol,jmenoCol);
 
         GridPane pridani = new GridPane();
         Label pridaniLabelCislo = new Label("Číslo:");
         Label pridaniLabelJmeno = new Label("Jméno hráče:");
         TextField pridaniCislo = new TextField();
-        pridaniCislo.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    pridaniCislo.setText(newValue.replaceAll("[^\\d]", ""));
-                }
+        pridaniCislo.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                pridaniCislo.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
         pridaniCislo.setMinSize(35,30);
@@ -381,10 +522,27 @@ public class ProPoradatele extends Application {
         TextField pridaniJmeno = new TextField();
         pridaniJmeno.setMinSize(150,30);
         pridaniJmeno.setMaxSize(150,30);
+
         Button addBT = new Button("Přidat");
+        addBT.setOnAction(actionEvent -> {
+            if(Integer.parseInt(pridaniCislo.getText())<minCislo || Integer.parseInt(pridaniCislo.getText())>maxCislo){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("Špatné číslo");
+                alert.setContentText("Zadejte číslo mezi 1 - 99!");
+                pridaniCislo.setText("");
+                alert.showAndWait();
+            } else {
+                Hrac1 novyHrac = new Hrac1(Integer.parseInt(pridaniCislo.getText()), pridaniJmeno.getText());
+                table1.getItems().add(novyHrac);
+                pridaniCislo.setText("");
+                pridaniJmeno.setText(null);
+            }
+        });
         addBT.setMinSize(100,30);
         addBT.setMaxSize(100,30);
+
         Button removeBT = new Button("Odstranit");
+        removeBT.setOnAction(actionEvent -> delete1());
         removeBT.setMinSize(100,30);
         removeBT.setMaxSize(100,30);
         pridani.add(pridaniLabelCislo, 0, 0);
@@ -458,6 +616,21 @@ public class ProPoradatele extends Application {
         ObservableList<Hrac2> selection = table2.getSelectionModel().getSelectedItems();
         table2.getItems().removeAll(selection);
         table2.getSelectionModel().clearSelection();
+    }
+    public static class ConsumingTextFieldTableCell<S, T> extends TextFieldTableCell<S, T> {
+        public ConsumingTextFieldTableCell(StringConverter<T> converter) {
+            super(converter);
+
+            setOnKeyReleased(event -> {
+                if (event.getCode() == KeyCode.DELETE) {
+                    event.consume();
+                }
+            });
+        }
+
+        public ConsumingTextFieldTableCell() {
+            this((StringConverter<T>) new DefaultStringConverter());
+        }
     }
 
 }

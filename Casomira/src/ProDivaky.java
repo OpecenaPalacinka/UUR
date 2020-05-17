@@ -1,4 +1,3 @@
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -12,8 +11,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class ProDivaky {
-
-   // public static void main(String[] args) {launch(args);}
 
     public ProDivaky(){
         Stage stage1 = new Stage();
@@ -39,6 +36,7 @@ public class ProDivaky {
 
         TextArea jmenoTymu2 = new TextArea("Jmeno tymu 2");
         jmenoTymu2.setEditable(false);
+        //jmenoTymu2.textProperty().bindBidirectional();
         jmenoTymu2.setMinSize(300,50);
         jmenoTymu2.setMaxSize(300,50);
 
