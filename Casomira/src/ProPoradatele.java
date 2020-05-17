@@ -90,7 +90,7 @@ public class ProPoradatele extends Application {
             }
         });
         tymSkore2.textProperty().bindBidirectional(tym2.pocetGoluProperty(),new NumberStringConverter());
-        tymSkore2.setMaxSize(50,75);
+        tymSkore2.setMaxSize(60,50);
 
         Button skorePlus2 = new Button("+");
         skorePlus2.setOnAction(actionEvent -> tym2.setPocetGolu(tym2.getPocetGolu()+1));
@@ -102,11 +102,12 @@ public class ProPoradatele extends Application {
                 tym2.setPocetGolu(tym2.getPocetGolu()-1);
             }
         });
-        buttonyPlusMinus.setSpacing(15);
+        buttonyPlusMinus.setSpacing(10);
         skoreMinus2.setFont(new Font(14));
+        skoreMinus2.setPadding(new Insets(1,9.05,3,9.05));
 
         buttonyPlusMinus.setPadding(new Insets(0,0,0,15));
-        skoreAButtony.setPadding(new Insets(15,0,25,125));
+        skoreAButtony.setPadding(new Insets(15,0,15,125));
         buttonyPlusMinus.getChildren().addAll(skorePlus2,skoreMinus2);
         skoreAButtony.getChildren().addAll(tymSkore2,buttonyPlusMinus);
 
@@ -119,8 +120,8 @@ public class ProPoradatele extends Application {
 
         table2.setEditable(false);
         table2.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        table2.setMinSize(200,375);
-        table2.setMaxSize(200,375);
+        table2.setMinSize(200,325);
+        table2.setMaxSize(200,325);
 
         TableColumn<Hrac2,Integer> cisloCol = new TableColumn<>("Číslo hráče");
         cisloCol.setCellValueFactory(new PropertyValueFactory<>("cisloHrace"));
@@ -329,7 +330,7 @@ public class ProPoradatele extends Application {
             }
         });
         tymSkore1.textProperty().bindBidirectional(tym1.pocetGoluProperty(),new NumberStringConverter());
-        tymSkore1.setMaxSize(50,75);
+        tymSkore1.setMaxSize(60,50);
 
         Button skorePlus1 = new Button("+");
         skorePlus1.setOnAction(actionEvent -> tym1.setPocetGolu(tym1.getPocetGolu()+1));
@@ -341,11 +342,12 @@ public class ProPoradatele extends Application {
                 tym1.setPocetGolu(tym1.getPocetGolu()-1);
             }
         });
-        buttony.setSpacing(15);
+        buttony.setSpacing(10);
         skoreMinus1.setFont(new Font(14));
+        skoreMinus1.setPadding(new Insets(1,9.05,3,9.05));
 
         buttony.setPadding(new Insets(0,0,0,15));
-        skoreAButtony.setPadding(new Insets(15,0,25,120));
+        skoreAButtony.setPadding(new Insets(15,0,15,120));
         buttony.getChildren().addAll(skorePlus1,skoreMinus1);
         skoreAButtony.getChildren().addAll(tymSkore1,buttony);
 
@@ -360,8 +362,8 @@ public class ProPoradatele extends Application {
         table1.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         TableColumn<Tym1,Integer> cisloCol = new TableColumn<>("Číslo hráče");
         TableColumn<Tym1,String> jmenoCol = new TableColumn<>("Jméno hráče");
-        table1.setMinSize(200,375);
-        table1.setMaxSize(200,375);
+        table1.setMinSize(200,325);
+        table1.setMaxSize(200,325);
 
         GridPane pridani = new GridPane();
         Label pridaniLabelCislo = new Label("Číslo:");
