@@ -54,9 +54,7 @@ public class ProPoradatele extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Časomíra");
         primaryStage.getIcons().add(image);
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        //primaryStage.setMinWidth(dimension.getWidth()-320);
-        //primaryStage.setMinHeight(dimension.getHeight()-160);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
