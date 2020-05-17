@@ -55,8 +55,8 @@ public class ProPoradatele extends Application {
         primaryStage.setTitle("Časomíra");
         primaryStage.getIcons().add(image);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        primaryStage.setMinWidth(dimension.getWidth()-320);
-        primaryStage.setMinHeight(dimension.getHeight()-160);
+        //primaryStage.setMinWidth(dimension.getWidth()-320);
+        //primaryStage.setMinHeight(dimension.getHeight()-160);
         primaryStage.show();
     }
 
@@ -77,7 +77,7 @@ public class ProPoradatele extends Application {
         VBox buttonyPlusMinus = new VBox();
 
         Label pocetGolu = new Label("Počet gólů týmu 2");
-        pocetGolu.setFont(new Font("Calibri",20));
+        pocetGolu.setFont(new Font("Calibri",18));
 
         TextField tymSkore2 = new TextField();
         tymSkore2.setFont(new Font(16));
@@ -119,8 +119,8 @@ public class ProPoradatele extends Application {
 
         table2.setEditable(false);
         table2.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        table2.setMinSize(250,450);
-        table2.setMaxSize(250,450);
+        table2.setMinSize(200,375);
+        table2.setMaxSize(200,375);
 
         TableColumn<Hrac2,Integer> cisloCol = new TableColumn<>("Číslo hráče");
         cisloCol.setCellValueFactory(new PropertyValueFactory<>("cisloHrace"));
@@ -171,7 +171,7 @@ public class ProPoradatele extends Application {
         pridani.setPadding(new Insets(5));
 
         pravaLista.setSpacing(25);
-        pravaLista.setPadding(new Insets(25,55,0,0));
+        pravaLista.setPadding(new Insets(10,25,0,0));
         pravaLista.setAlignment(Pos.TOP_CENTER);
         pravaLista.getChildren().addAll(pocetGolu,skoreAButtony,tym2TF, table2,pridani);
         return pravaLista;
@@ -197,8 +197,8 @@ public class ProPoradatele extends Application {
                 }
             }
         });
-        tretinaField.setMinSize(50,75);
-        tretinaField.setMaxSize(50,75);
+        tretinaField.setMinSize(60,50);
+        tretinaField.setMaxSize(60,50);
         FlowPane tretinaButtony = new FlowPane();
         Button plus = new Button("+");
         plus.setOnAction(actionEvent -> casATretina.setTretina(casATretina.getTretina()+1));
@@ -222,8 +222,8 @@ public class ProPoradatele extends Application {
         casLabel.setFont(new Font(20));
         TextField cas = new TextField();
         cas.setEditable(false);
-        cas.setMinSize(300,125);
-        cas.setMaxSize(300,125);
+        cas.setMinSize(200,75);
+        cas.setMaxSize(200,75);
         cas.setAlignment(Pos.TOP_CENTER);
         cas.setText("Aktualni cas");
 
@@ -239,7 +239,7 @@ public class ProPoradatele extends Application {
         startStop.setAlignment(Pos.CENTER);
         startStop.getChildren().addAll(start,stop);
 
-        casBox.setSpacing(35);
+        casBox.setSpacing(15);
         casBox.setAlignment(Pos.CENTER);
         casBox.getChildren().addAll(casLabel,cas,startStop);
         horniBox.setAlignment(Pos.TOP_CENTER);
@@ -257,10 +257,10 @@ public class ProPoradatele extends Application {
         TextArea vyloceni22 = new TextArea();
         vylouceniNa2.setAlignment(Pos.CENTER);
         vylouceniNa2.setSpacing(50);
-        vylouceni21.setMinSize(250,85);
-        vylouceni21.setMaxSize(250,85);
-        vyloceni22.setMinSize(250,85);
-        vyloceni22.setMaxSize(250,85);
+        vylouceni21.setMinSize(200,85);
+        vylouceni21.setMaxSize(200,85);
+        vyloceni22.setMinSize(200,85);
+        vyloceni22.setMaxSize(200,85);
         vylouceniNa2.getChildren().addAll(vylouceni21,vylouceni2,vyloceni22);
 
         TextArea vylouceni51 = new TextArea();
@@ -268,10 +268,10 @@ public class ProPoradatele extends Application {
         TextArea vylouceni52 = new TextArea();
         vylouceniNa5.setAlignment(Pos.CENTER);
         vylouceniNa5.setSpacing(50);
-        vylouceni51.setMinSize(250,85);
-        vylouceni51.setMaxSize(250,85);
-        vylouceni52.setMinSize(250,85);
-        vylouceni52.setMaxSize(250,85);
+        vylouceni51.setMinSize(200,85);
+        vylouceni51.setMaxSize(200,85);
+        vylouceni52.setMinSize(200,85);
+        vylouceni52.setMaxSize(200,85);
         vylouceniNa5.getChildren().addAll(vylouceni51,vylouceni5,vylouceni52);
 
         GridPane pridani = new GridPane();
@@ -303,8 +303,8 @@ public class ProPoradatele extends Application {
         pridani.setPadding(new Insets(5));
         pridani.setAlignment(Pos.CENTER);
 
-        prostredek.setPadding(new Insets(30,35,0,35));
-        prostredek.setSpacing(50);
+        prostredek.setPadding(new Insets(25,-10,0,-10));
+        prostredek.setSpacing(35);
         prostredek.setAlignment(Pos.TOP_CENTER);
         prostredek.getChildren().addAll(horniBox,timeouty,vylouceniNa2,vylouceniNa5,pridani);
         return prostredek;
@@ -316,7 +316,7 @@ public class ProPoradatele extends Application {
         VBox buttony = new VBox();
 
         Label pocetGolu = new Label("Počet gólů týmu 1");
-        pocetGolu.setFont(new Font("Calibri",20));
+        pocetGolu.setFont(new Font("Calibri",18));
 
         TextField tymSkore1 = new TextField();
         tymSkore1.setFont(new Font(16));
@@ -345,7 +345,7 @@ public class ProPoradatele extends Application {
         skoreMinus1.setFont(new Font(14));
 
         buttony.setPadding(new Insets(0,0,0,15));
-        skoreAButtony.setPadding(new Insets(15,0,25,125));
+        skoreAButtony.setPadding(new Insets(15,0,25,120));
         buttony.getChildren().addAll(skorePlus1,skoreMinus1);
         skoreAButtony.getChildren().addAll(tymSkore1,buttony);
 
@@ -360,8 +360,8 @@ public class ProPoradatele extends Application {
         table1.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         TableColumn<Tym1,Integer> cisloCol = new TableColumn<>("Číslo hráče");
         TableColumn<Tym1,String> jmenoCol = new TableColumn<>("Jméno hráče");
-        table1.setMinSize(250,450);
-        table1.setMaxSize(250,450);
+        table1.setMinSize(200,375);
+        table1.setMaxSize(200,375);
 
         GridPane pridani = new GridPane();
         Label pridaniLabelCislo = new Label("Číslo:");
@@ -399,7 +399,7 @@ public class ProPoradatele extends Application {
         pridani.setPadding(new Insets(5));
 
         levaLista.setSpacing(25);
-        levaLista.setPadding(new Insets(25,0,0,55));
+        levaLista.setPadding(new Insets(10,0,0,25));
         levaLista.setAlignment(Pos.TOP_CENTER);
         levaLista.getChildren().addAll(pocetGolu,skoreAButtony,tym1TF, table1,pridani);
         return levaLista;
