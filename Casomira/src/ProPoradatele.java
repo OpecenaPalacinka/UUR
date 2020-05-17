@@ -55,8 +55,8 @@ public class ProPoradatele extends Application {
         primaryStage.setTitle("Časomíra");
         primaryStage.getIcons().add(image);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        primaryStage.setMinWidth(dimension.getWidth()-200);
-        primaryStage.setMinHeight(dimension.getHeight()-100);
+        primaryStage.setMinWidth(dimension.getWidth()-320);
+        primaryStage.setMinHeight(dimension.getHeight()-160);
         primaryStage.show();
     }
 
@@ -90,7 +90,7 @@ public class ProPoradatele extends Application {
             }
         });
         tymSkore2.textProperty().bindBidirectional(tym2.pocetGoluProperty(),new NumberStringConverter());
-        tymSkore2.setMaxSize(50,100);
+        tymSkore2.setMaxSize(50,75);
 
         Button skorePlus2 = new Button("+");
         skorePlus2.setOnAction(actionEvent -> tym2.setPocetGolu(tym2.getPocetGolu()+1));
@@ -105,8 +105,8 @@ public class ProPoradatele extends Application {
         buttonyPlusMinus.setSpacing(15);
         skoreMinus2.setFont(new Font(14));
 
-        buttonyPlusMinus.setPadding(new Insets(15));
-        skoreAButtony.setPadding(new Insets(25,0,25,125));
+        buttonyPlusMinus.setPadding(new Insets(0,0,0,15));
+        skoreAButtony.setPadding(new Insets(15,0,25,125));
         buttonyPlusMinus.getChildren().addAll(skorePlus2,skoreMinus2);
         skoreAButtony.getChildren().addAll(tymSkore2,buttonyPlusMinus);
 
@@ -119,8 +119,8 @@ public class ProPoradatele extends Application {
 
         table2.setEditable(false);
         table2.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        table2.setMinSize(300,500);
-        table2.setMaxSize(300,500);
+        table2.setMinSize(250,450);
+        table2.setMaxSize(250,450);
 
         TableColumn<Hrac2,Integer> cisloCol = new TableColumn<>("Číslo hráče");
         cisloCol.setCellValueFactory(new PropertyValueFactory<>("cisloHrace"));
@@ -171,7 +171,7 @@ public class ProPoradatele extends Application {
         pridani.setPadding(new Insets(5));
 
         pravaLista.setSpacing(25);
-        pravaLista.setPadding(new Insets(25,85,0,0));
+        pravaLista.setPadding(new Insets(25,55,0,0));
         pravaLista.setAlignment(Pos.TOP_CENTER);
         pravaLista.getChildren().addAll(pocetGolu,skoreAButtony,tym2TF, table2,pridani);
         return pravaLista;
@@ -197,8 +197,8 @@ public class ProPoradatele extends Application {
                 }
             }
         });
-        tretinaField.setMinSize(75,100);
-        tretinaField.setMaxSize(75,100);
+        tretinaField.setMinSize(50,75);
+        tretinaField.setMaxSize(50,75);
         FlowPane tretinaButtony = new FlowPane();
         Button plus = new Button("+");
         plus.setOnAction(actionEvent -> casATretina.setTretina(casATretina.getTretina()+1));
@@ -222,19 +222,19 @@ public class ProPoradatele extends Application {
         casLabel.setFont(new Font(20));
         TextField cas = new TextField();
         cas.setEditable(false);
-        cas.setMinSize(400,150);
-        cas.setMaxSize(400,150);
+        cas.setMinSize(300,125);
+        cas.setMaxSize(300,125);
         cas.setAlignment(Pos.TOP_CENTER);
         cas.setText("Aktualni cas");
 
         FlowPane startStop = new FlowPane();
         Button start = new Button("Start");
-        start.setMinSize(150,50);
-        start.setMaxSize(150,50);
+        start.setMinSize(125,50);
+        start.setMaxSize(125,50);
 
         Button stop = new Button("Stop");
-        stop.setMinSize(150,50);
-        stop.setMaxSize(150,50);
+        stop.setMinSize(125,50);
+        stop.setMaxSize(125,50);
         startStop.setHgap(25);
         startStop.setAlignment(Pos.CENTER);
         startStop.getChildren().addAll(start,stop);
@@ -257,10 +257,10 @@ public class ProPoradatele extends Application {
         TextArea vyloceni22 = new TextArea();
         vylouceniNa2.setAlignment(Pos.CENTER);
         vylouceniNa2.setSpacing(50);
-        vylouceni21.setMinSize(300,100);
-        vylouceni21.setMaxSize(300,100);
-        vyloceni22.setMinSize(300,100);
-        vyloceni22.setMaxSize(300,100);
+        vylouceni21.setMinSize(250,85);
+        vylouceni21.setMaxSize(250,85);
+        vyloceni22.setMinSize(250,85);
+        vyloceni22.setMaxSize(250,85);
         vylouceniNa2.getChildren().addAll(vylouceni21,vylouceni2,vyloceni22);
 
         TextArea vylouceni51 = new TextArea();
@@ -268,10 +268,10 @@ public class ProPoradatele extends Application {
         TextArea vylouceni52 = new TextArea();
         vylouceniNa5.setAlignment(Pos.CENTER);
         vylouceniNa5.setSpacing(50);
-        vylouceni51.setMinSize(300,100);
-        vylouceni51.setMaxSize(300,100);
-        vylouceni52.setMinSize(300,100);
-        vylouceni52.setMaxSize(300,100);
+        vylouceni51.setMinSize(250,85);
+        vylouceni51.setMaxSize(250,85);
+        vylouceni52.setMinSize(250,85);
+        vylouceni52.setMaxSize(250,85);
         vylouceniNa5.getChildren().addAll(vylouceni51,vylouceni5,vylouceni52);
 
         GridPane pridani = new GridPane();
@@ -303,7 +303,7 @@ public class ProPoradatele extends Application {
         pridani.setPadding(new Insets(5));
         pridani.setAlignment(Pos.CENTER);
 
-        prostredek.setPadding(new Insets(30,50,0,50));
+        prostredek.setPadding(new Insets(30,35,0,35));
         prostredek.setSpacing(50);
         prostredek.setAlignment(Pos.TOP_CENTER);
         prostredek.getChildren().addAll(horniBox,timeouty,vylouceniNa2,vylouceniNa5,pridani);
@@ -329,7 +329,7 @@ public class ProPoradatele extends Application {
             }
         });
         tymSkore1.textProperty().bindBidirectional(tym1.pocetGoluProperty(),new NumberStringConverter());
-        tymSkore1.setMaxSize(50,100);
+        tymSkore1.setMaxSize(50,75);
 
         Button skorePlus1 = new Button("+");
         skorePlus1.setOnAction(actionEvent -> tym1.setPocetGolu(tym1.getPocetGolu()+1));
@@ -344,8 +344,8 @@ public class ProPoradatele extends Application {
         buttony.setSpacing(15);
         skoreMinus1.setFont(new Font(14));
 
-        buttony.setPadding(new Insets(15));
-        skoreAButtony.setPadding(new Insets(25,0,25,125));
+        buttony.setPadding(new Insets(0,0,0,15));
+        skoreAButtony.setPadding(new Insets(15,0,25,125));
         buttony.getChildren().addAll(skorePlus1,skoreMinus1);
         skoreAButtony.getChildren().addAll(tymSkore1,buttony);
 
@@ -360,8 +360,8 @@ public class ProPoradatele extends Application {
         table1.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         TableColumn<Tym1,Integer> cisloCol = new TableColumn<>("Číslo hráče");
         TableColumn<Tym1,String> jmenoCol = new TableColumn<>("Jméno hráče");
-        table1.setMinSize(300,500);
-        table1.setMaxSize(300,500);
+        table1.setMinSize(250,450);
+        table1.setMaxSize(250,450);
 
         GridPane pridani = new GridPane();
         Label pridaniLabelCislo = new Label("Číslo:");
@@ -399,7 +399,7 @@ public class ProPoradatele extends Application {
         pridani.setPadding(new Insets(5));
 
         levaLista.setSpacing(25);
-        levaLista.setPadding(new Insets(25,0,0,85));
+        levaLista.setPadding(new Insets(25,0,0,55));
         levaLista.setAlignment(Pos.TOP_CENTER);
         levaLista.getChildren().addAll(pocetGolu,skoreAButtony,tym1TF, table1,pridani);
         return levaLista;
