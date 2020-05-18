@@ -6,7 +6,7 @@ public class CasATretina {
     private IntegerProperty cas;
 
     public CasATretina(){
-        this.tretina = new SimpleIntegerProperty();
+        this.tretina = new SimpleIntegerProperty(1);
         this.cas = new SimpleIntegerProperty();
     }
 

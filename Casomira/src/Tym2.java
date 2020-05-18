@@ -46,4 +46,9 @@ public class Tym2 {
     public void setTimeout(boolean timeout) {
         this.timeout.set(timeout);
     }
+
+    @Override
+    public String toString(){
+        return getJmenoTymu();
+    }
 }

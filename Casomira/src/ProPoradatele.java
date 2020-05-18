@@ -35,9 +35,9 @@ public class ProPoradatele extends Application {
     TableView<Hrac1> tableNaVylouceni51 = new TableView<>();
     TableView<Hrac2> tableNaVylouceni22 = new TableView<>();
     TableView<Hrac2> tableNaVylouceni52 = new TableView<>();
-    public Tym1 tym1 = new Tym1();
-    public Tym2 tym2 = new Tym2();
-    public CasATretina casATretina = new CasATretina();
+    public static Tym1 tym1 = new Tym1();
+    public static Tym2 tym2 = new Tym2();
+    public static CasATretina casATretina = new CasATretina();
     int minCislo = 1;
     int maxCislo = 99;
     public int tretina = 0;
@@ -109,8 +109,9 @@ public class ProPoradatele extends Application {
 
         TextField tym2TF = new TextField();
         tym2TF.setPromptText("Jmeno tymu 2");
-        tym2TF.textProperty().bindBidirectional(tym2.jmenoTymuProperty());
-        tym2TF.setOnAction(actionEvent -> tym2.setJmenoTymu(tym2TF.toString()));
+        tym2TF.textProperty().addListener((observable, oldValue, newValue) -> {
+            tym2.setJmenoTymu(newValue);
+        });
         tym2TF.setMinSize(200,30);
         tym2TF.setMaxSize(200,30);
 
@@ -148,7 +149,18 @@ public class ProPoradatele extends Application {
         pridaniJmeno.setMaxSize(150,30);
         Button addBT = new Button("Přidat");
         addBT.setOnAction(actionEvent -> {
-            if(Integer.parseInt(pridaniCislo.getText())<minCislo || Integer.parseInt(pridaniCislo.getText())>maxCislo){
+            if (pridaniCislo.getText().equals("")) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("Špatné číslo");
+                alert.setContentText("Nezadali jste číslo. Zadejte číslo mezi 1 - 99!");
+                alert.showAndWait();
+            } else if (pridaniJmeno.getText().equals("")) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("Nezadali jste jméno");
+                alert.setContentText("Zadejte jméno hráče!");
+                pridaniCislo.setText("");
+                alert.showAndWait();
+            } else if(Integer.parseInt(pridaniCislo.getText())<minCislo || Integer.parseInt(pridaniCislo.getText())>maxCislo){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setHeaderText("Špatné číslo");
                 alert.setContentText("Zadejte číslo mezi 1 - 99!");
@@ -203,11 +215,19 @@ public class ProPoradatele extends Application {
                 tretinaField.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
+        tretinaField.setFont(new Font(19));
+        tretinaField.textProperty().bindBidirectional(casATretina.tretinaProperty(),new NumberStringConverter());
         tretinaField.setMinSize(60,50);
         tretinaField.setMaxSize(60,50);
         FlowPane tretinaButtony = new FlowPane();
         Button plus = new Button("+");
-        plus.setOnAction(actionEvent -> casATretina.setTretina(casATretina.getTretina()+1));
+        plus.setOnAction(actionEvent -> {
+            if(casATretina.getTretina()+1>4){
+                casATretina.setTretina(casATretina.getTretina());
+            } else {
+                casATretina.setTretina(casATretina.getTretina()+1);
+            }
+        });
         Button minus = new Button("-");
         minus.setOnAction(actionEvent -> {
             if(casATretina.getTretina()-1<1){
@@ -256,10 +276,22 @@ public class ProPoradatele extends Application {
         horniBox.getChildren().addAll(tretina,casBox);
 
         CheckBox timeoutTym1 = new CheckBox();
-        timeoutTym1.setOnAction(actionEvent -> tym1.setTimeout(true));
+        timeoutTym1.setOnAction(actionEvent -> {
+            if(timeoutTym1.isSelected()){
+                tym1.setTimeout(true);
+            } else {
+                tym1.setTimeout(false);
+            }
+        });
         Label timeout = new Label("Timeout");
         CheckBox timeoutTym2 = new CheckBox();
-        timeoutTym2.setOnAction(actionEvent -> tym2.setTimeout(true));
+        timeoutTym2.setOnAction(actionEvent -> {
+            if(timeoutTym2.isSelected()){
+                tym2.setTimeout(true);
+            } else {
+                tym2.setTimeout(false);
+            }
+        });
         timeouty.setAlignment(Pos.CENTER);
         timeouty.setSpacing(150);
         timeouty.getChildren().addAll(timeoutTym1,timeout,timeoutTym2);
@@ -484,8 +516,9 @@ public class ProPoradatele extends Application {
 
         TextField tym1TF = new TextField();
         tym1TF.setPromptText("Jmeno tymu 1");
-        tym1TF.textProperty().bindBidirectional(tym1.jmenoTymuProperty());
-        tym1TF.setOnAction(actionEvent -> tym1.setJmenoTymu(tym1TF.toString()));
+        tym1TF.textProperty().addListener((observable, oldValue, newValue) -> {
+            tym1.setJmenoTymu(newValue);
+        });
         tym1TF.setMinSize(200,30);
         tym1TF.setMaxSize(200,30);
 
@@ -525,7 +558,18 @@ public class ProPoradatele extends Application {
 
         Button addBT = new Button("Přidat");
         addBT.setOnAction(actionEvent -> {
-            if(Integer.parseInt(pridaniCislo.getText())<minCislo || Integer.parseInt(pridaniCislo.getText())>maxCislo){
+            if (pridaniCislo.getText().equals("")) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("Špatné číslo");
+                alert.setContentText("Nezadali jste číslo. Zadejte číslo mezi 1 - 99!");
+                alert.showAndWait();
+            } else if (pridaniJmeno.getText().equals("")) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("Nezadali jste jméno");
+                alert.setContentText("Zadejte jméno hráče!");
+                pridaniCislo.setText("");
+                alert.showAndWait();
+            } else if(Integer.parseInt(pridaniCislo.getText())<minCislo || Integer.parseInt(pridaniCislo.getText())>maxCislo){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setHeaderText("Špatné číslo");
                 alert.setContentText("Zadejte číslo mezi 1 - 99!");
