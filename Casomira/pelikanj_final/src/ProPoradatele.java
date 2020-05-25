@@ -83,17 +83,7 @@ public class ProPoradatele extends Application {
 
                         casATretina.odectiVterinu();
                     }
-                    if(casATretina.getMinuty() == 0 && casATretina.getVteriny()==0 && casATretina.getTretina() == 3 && tym1.getPocetGolu()==tym2.getPocetGolu()){
-                        pauza = true;
-                        casATretina.setMinuty(5);
-                        casATretina.setVteriny(0);
-                        casATretina.setTretina(casATretina.getTretina()+1);
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Prodloužení");
-                        alert.setHeaderText("Prodloužení");
-                        alert.setContentText("Oba týmy vstřelili stejný počet branek, bude prodloužení");
-                        alert.showAndWait();
-                    } else if(casATretina.getMinuty() == 0 && casATretina.getVteriny()==0 && casATretina.getTretina() >= 3){
+                    if(casATretina.getMinuty() == 0 && casATretina.getVteriny()==0 && casATretina.getTretina() >= 3){
                         pauza = true;
                         pause();
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -105,12 +95,12 @@ public class ProPoradatele extends Application {
                         casATretina.setVteriny(0);
                         casATretina.setMinuty(20);
                         pauza = true;
-                        casATretina.setTretina(casATretina.getTretina()+1);
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("KONEC");
                         alert.setHeaderText("Konec třetiny");
                         alert.setContentText("Konec třetiny, přicetl jsem třetinu.");
                         alert.showAndWait();
+                        casATretina.setTretina(casATretina.getTretina()+1);
                     }
 
                 });

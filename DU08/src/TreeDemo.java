@@ -175,11 +175,11 @@ public class TreeDemo extends Application {
 	
 	// cretaes default values for the tree, on several levels
 	private void createDefaultChildren(TreeItem<Datamodel> parent) {
-		TreeItem<Datamodel> usersItem = new TreeItem<Datamodel>(new Datamodel("Users", Typ.ADRESAR));
-		TreeItem<Datamodel> programFilesItem = new TreeItem<Datamodel>(new Datamodel("ProgramFiles", Typ.ADRESAR));
-		TreeItem<Datamodel> myProfileItem = new TreeItem<Datamodel>(new Datamodel("MyProfile", Typ.ADRESAR));
-		TreeItem<Datamodel> desktopItem = new TreeItem<Datamodel>(new Datamodel("Desktop", Typ.ADRESAR));
-		TreeItem<Datamodel> googleItem = new TreeItem<Datamodel>(new Datamodel("Google", Typ.SOUBOR));
+		TreeItem<Datamodel> usersItem = new TreeItem<>(new Datamodel("Users", Typ.ADRESAR));
+		TreeItem<Datamodel> programFilesItem = new TreeItem<>(new Datamodel("ProgramFiles", Typ.ADRESAR));
+		TreeItem<Datamodel> myProfileItem = new TreeItem<>(new Datamodel("MyProfile", Typ.ADRESAR));
+		TreeItem<Datamodel> desktopItem = new TreeItem<>(new Datamodel("Desktop", Typ.ADRESAR));
+		TreeItem<Datamodel> googleItem = new TreeItem<>(new Datamodel("Google", Typ.SOUBOR));
 
 
 		myProfileItem.getChildren().add(desktopItem);
