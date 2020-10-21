@@ -1,0 +1,1 @@
+java -p "C:\Users\Pelikán\Desktop\2.Semestr\JavaFX\javafx-sdk-11.0.2\lib" --add-modules javafx.controls -jar Casomira.jar

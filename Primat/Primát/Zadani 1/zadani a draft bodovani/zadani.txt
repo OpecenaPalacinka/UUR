@@ -1,0 +1,80 @@
+Zkouška z UUR - pøedtermín
+
+Tabulka
+=======
+
+Váš úkol je podobnı jako bìhem cvièení. V adresáøi "program" máte spustitelnı .jar
+obsahující ukázkovı program. Vaším úkolem bude vytvoøit program se stejnımi funkcemi. 
+Ne zaènete programovat, pøeètìte si peèlivì zadání, vyzkoušejte si ukázkovı program
+a rozmyslete si, jak bude váš program vypadat. Pokud nìco nebude jasné, zeptejte se.
+
+
+Popis chování programu
+----------------------
+Program je jednoduchá tabulka s tabulkou typù letadel. Letadla je moné do tabulky pøidávat a 
+ubírat, menu umoòuje pøístup ke stejnım funkcím jako tlaèítka. 
+
+1) Tabulka a datovı model
+   Tabulka obsahuje 5 sloupcù. V prvním je jméno letadla (libovolnı øetìzec), ve
+   druhém typ letadla (vıbìr ze seznamu), ve tøetím je váha letadla v kg (desetinné èíslo
+   v rozsahu 0 - 1 000 000). Ètvrtı sloupec obsahuje dolet letadla (desetinné èíslo
+   v rozsahu 0 - 100 000). Pátı sloupec obsahuje datum prvního startu letadla (datum
+   nemusí bıt vyplnìno - pokud je smazáno nebo je pøidáno nové letadlo, datum bude
+   zobrazovat "not set" nebo podobnı øetìzec).
+   Sloupec Typ není moné volnì editovat, data je tøeba vybrat ze seznamu. Ostatní
+   sloupce lze editovat volnì, nezapomeòte ale na kontrolu datového typu. Je moné 
+   vybrat libovolnı poèet øádkù v tabulce najednou.
+   Tabulku lze øadit podle všech sloupcù kromì typu.
+   
+   Datum, váha i dolet je formátován podle nìmeckıch pravidel (. jako oddìlovaè 
+   tisícù, , jako oddìlovaè desetinnıch míst). Pokud se vám v dialozích místo
+   "Cancel" bude objevovat "Abbrechen" kvùli práci s Locale, nechte ho tam.
+   Váha a dolet se zobrazuje tuènım písmem, datum prvního letu kurzívou.
+   Pro jednoduchost ponechte vstup podle pravidel bìnıch pro poèítaèe (bez oddìlovaèù
+   tisícl, s . jako oddìlovaèem desetinnıch míst), vıpis v textu na levé stranì 
+   také nemusíte formátovat.    
+   
+   Vedle tabulky je textové pole s popisem vybranıch øádek. Pokud je nìco vybráno, 
+   obsahuje seznam jmen vybranıch letadel.  Všimnìte si, e rozmìry panelu s 
+   tabulkou a s textem lze mìnit. Nezapomeòte e pokud mìníte buòky v øádku, je ten
+   øádek vybranı (napø. po zmìnì váhy nebo jména letadla by se tato zmìna mìla projevit
+   i ve vıpisu nalevo).
+   
+   Abyste nemuseli vytváøet vlastní datovı model, máte k dispozici tøídu Airplane a
+   vıètovı typ AirplaneType, které mùete pouít pro uloení dat do tabulky. Tøída 
+   Airplane zajistí i vytvoøení defaultních dat. Není nezbytné tyto tøídy vyuít, 
+   ale ušetøí vám to cennı èas. 
+    
+2) Tlaèítka
+   V levé èásti okna mùete vidìt tlaèítka pro pøidávání a mazání øádkù a pro
+   zavøení aplikace. Jde o jeden zpùsob, jak poèet øádkù mìnit. Novì vkládanı 
+   øádek vyplòte nìjakou základní hodnotou, kterou uivatel pozdìji zmìní. 
+   Nezapomeòte e lze vybrat - a tedy i mazat nìkolik øádkù najednou.
+   Tlaèítko pro zavøení aplikace vyaduje potvrzené této akce. 
+   
+   Dialog potvrzující mazání obsahuje kromì informace o mazání i seznam letael urèenıch 
+   ke smazání. Snate se, aby v seznamu nebylo najednou vidìt víc ne 6 mazanıch letadel
+   (abz nebyl zbyteènì vysokı, ale se scrollbarem) a aby byla vidìt jména všech vybranıch
+   letadel. Pøi pokusu o mazání kdy není vybráno nic by se mìl objevit
+   dialog upozoròující, e není nic vybráno. 
+    
+3) Menu
+   V horní èásti okna je menu s jednou polokou. Ta funguje podobnì jako tlaèítka 
+   v dolní èásti okna - umoòuje pøidávat a ubírat øádky. Všimnìte si nastavenıch
+   klávesovıch zkratek i akcelerátorù.
+   
+Poznámky k implementaci       
+-----------------------
+
+- Datum je formátováno podle pravidel pro nìmèinu, jak v editatèním tak
+  ve vykreslovacím reimu (dialog tedy obsahuje nìmecká jména mìsícù)
+- Všimìnte si, e kdy není nic vybráno a maete buòky, objeví se chybové hlášení
+- Pozor na ošetøení vkládanıch dat, nenechte program spadnout na vıjimce.
+- Všimnìte si jak se chová editor data pokud ádné datum není zadáno. 
+- Text na levé stranì reaguje na zmìnu vıbìru tabulky, a u je vıbìr proveden myší 
+  nebo klávesnicí  
+- Dùleité je hlavnì vkládání a mazání øádek, editace data, váhy a doletu a jejich zobrazení  
+  
+Bonusy navíc
+------------
+- Pouití FXML a CSS (správnì provedené) je hodnocené + 3 body 

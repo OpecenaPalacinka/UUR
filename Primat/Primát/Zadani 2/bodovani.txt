@@ -1,0 +1,33 @@
+Bodování - RocketShip designer (návrh)
+
+Nutné pøedpoklady (bez nich nebude zkouška ani hodnocena)
+
+- Vytvoøení všech komponent GUI (tabulka, statusbar, formuláø nalevo)
+- Vložení nìkolika záznamù do tabulky
+- Fungující combobox pro typ modulu
+- Funkèní Ant skript a spustitelný .jar soubor s vloženými zdrojovými texty
+
+Bodované vlastnosti  
+
+- Pøidání vybraného modulu: 4
+- Aktualizace pøi zmìnì ceny nebo váhy: 3
+- Fungující pøidání prázdného øádku: 3
+- Fungující editace váhy (s kontrolou): 3
+- Fungující editace ceny (s kontrolou): 3
+- Hlášky ve stavovém øádku pøi zmìnách: 3
+- Hlášky ve stavovém øádku pøi chybách (barevnì odlišené): 3
+- Kontrola pøi zmìnì typu (nejde mìnit pokud je modul požitý): 3 
+- Mazání oznaèené øádky: 3
+- Dodržený layout (zejména formuláø nalevo): 3
+- Aktualizace po pøidání nebo ubrání modulu: 2
+- Kontrola neprázdného jména: 2
+- formátování ceny podle britských pravidel: 2
+- formátování data podle britských pravidel: 2
+- vzhled váhy a ceny (kurzíva): 1
+ 
+Celkem: 40
+Hodnocení:
+0 - 19: 4
+20 - 25: 3
+26 - 32: 2
+33 - 40: 1

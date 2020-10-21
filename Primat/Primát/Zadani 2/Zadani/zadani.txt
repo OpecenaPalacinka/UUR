@@ -1,0 +1,93 @@
+Zkouška z UUR - 2.7.2015
+
+Tabulka
+=======
+
+Váš úkol je podobnı jako bìhem cvièení. V adresáøi "program" máte spustitelnı .jar
+obsahující ukázkovı program. Vaším úkolem bude vytvoøit program se stejnımi funkcemi. 
+Ne zaènete programovat, pøeètìte si peèlivì zadání, vyzkoušejte si ukázkovı program
+a rozmyslete si, jak bude váš program vypadat. Pokud nìco nebude jasné, zeptejte se.
+
+
+Popis chování programu
+----------------------
+Program je konfiguraèní nástroj pro sestavení "kosmické lodì". Skládá se z aktuální
+konfigurace lodì a z tabulky se seznamem dostupnıch modulù.  
+
+1) Datovı model
+   Ve sloce "Zaklad" nadjete soubory které mùete pouít jako daotvı model. Jde o
+   vıètovı typ "ModuleType" kterı urèuje jaké druhy modulù mohou v raketì bıt, pak
+   Module kterı popisuje jeden modul a koneènì RocketShip popisující konfiguraci
+   jedné rakety. Není nutné tyto tøídy vyuít, ale mùe vám to ulehèit práci. Zejména
+   RocketShip obsahuje øadu metod které Vám usnadní ivot.
+   "Module" má urèenı typ, jméno, váhu, cenu a popis. Raketa je sloena z pìti 
+   modulù - Pod (kapsle pro náklad), Payload (náklad), Engine (motor), Fuel tank
+   (palivová nádr) a Aerodynamics (køídla). Tyto skupiny pøedstavují "pozice"
+   na které je moné vkládat moduly, na kadé pozici mùe bát jen jeden modul
+   (motor tedy nemùe bıt na pozici palivové nádre a podobnì). 
+2) Tabulka
+   Tabulka obsahuje seznam dostupnıch modulù. Moduly patøí do rùznıch skupin 
+   (ModuleType), ale všechny atributy mají stejné. U kadého modulu je moné urèit 
+   typ, jméno, váhu, cenu a popis. Pro tabulku platí následující pravidla:
+   Typ je dán vıètem, modul musí mít nìjakı typ. Není moné jej volnì editovat.
+   Jméno je neprázdnı text (musí bıt vyplnìno).
+   Váha je kladné desetinné èíslo. Pøi editaci jde jen o èíslo, v zobrazovacím reimu
+   je zobrazena i jednotka (kg).   
+   Cena je kladné desetinné èíslo. Pøi editaci jde jen o èíslo, v zobrazovacím reimu
+   je vypsána podle pravidel pro vıpis ceny v librách (britské národní prostøedí).
+   Popis je text, mùe bıt prázdnı.  
+   Tabulka zajišuje kontrolu správnosti vstupu. 
+3) Raketa
+   Na levé stranì jsou vypsány pozice na které je moné vkládat jednotlivé moduly, 
+   jméno vytváøené rakety a vypoètená cena a váha rakety.   
+   Jméno je volnì editovatelné, pøi kadé zmìnì se podle vyplnìného jména aktualizuje
+   nadpis. 
+   Váha a cena jsou pøepoèítány pøi kadé zmìnì struktury rakety - pøi pøidání 
+   nebo odebrání modulu nebo pøi zmìnì parametrù modulu v tabulce.
+   V øádcích jsou vypsány jednotlivé moduly. U kadého je tlaèítko umoòující 
+   modul z dané pozice odstranit. 
+4) Tlaèítka
+   Pod tabulkou jsou tlaèítka pro pøidání a smazání modulu a pro vloení modulu
+   do sestavované rakety. 
+   Tlaèítko pro pouití modulu zajistí vloení modulu do aktuální rakety na pøíslušnou
+   pozici (urèenou typem). Pokud na dané pozici modul je, bude rovnou nahrazen. 
+   Tlaèítko pro pøidání vloí do tabulky novı modul, nevyplnìnı a pøipravenı pro nastavení. 
+   Tlaèítko pro odebrání odebere modul z tabulky. Pokud je tento modul zaøazen do
+   rakety, odebere ho i z ní.         
+5) Status bar
+   Ve spodní èásti aplikace je stavovı øádek informujících o zmìnách v programu. 
+   Modøe vypisuje hlášení o probìhlıch operacích (pøidání modulu, zaøazení modulu
+   do rakety, zmìna nìjaké hodnoty v modulu ...), èervenì vypisuje problémy
+   (mazání nebo pouití modulu kdy není nic vybráno, zmìnu hodnoty na nesprávnou -
+   - napø. text místo èísla a podobnì).
+6) Konzistence dat
+   Váha a cena jsou vdy kladná èísla, váha má horní limit 30 000 kg, cena limitována
+   není.
+   Typ je moné mìnit jen pokud není modul pouit (pokud je motor v aktuální konfiguraci 
+   rakety, není moné zmìnit jeho typ).
+   Zmìny ceny a váhy se projevují ve vıpisu ceny a váhy sestavené rakety.       
+   
+Poznámky k implementaci       
+-----------------------
+
+- Datum a èas ve stavovém øádku je formátován podle pravidel pro britskou angliètinu, 
+  jde o "støednì dlouhı" vıpis data.
+- Mìna je formátována podle pravidel pro britskou libru.   
+- Všimìnte si, e kdy není nic vybráno a maete buòky, objeví se chybové hlášení ve
+  stavovém øádku
+- Pozor na ošetøení vkládanıch dat, nenechte program spadnout na vıjimce.
+- Dùleitá je hlavnì editace a kontrola dat - mìny a váhy
+- Pokud potøebujete obnovit tabulku (zmìnili jste model, ale z nìjakého dùvodu se zmìna
+  neprojevila v tabulce), mùete zkusit pouít podobnı trik:  
+
+  private void refreshTable() {
+    table.getColumns().get(4).setVisible(false);
+    table.getColumns().get(4).setVisible(true);		
+  }
+  
+  index v metodì get() je èíslo sloupce kterı se mìnil
+
+ 
+Bonusy navíc
+------------
+- Pouití FXML a CSS (správnì provedené) je hodnocené + 3 body

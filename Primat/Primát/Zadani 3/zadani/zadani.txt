@@ -1,0 +1,78 @@
+Zkouška z UUR - 26.6.2015
+
+Strom
+=====
+
+Váš úkol je podobnı jako bìhem cvièení. V adresáøi "program" máte spustitelnı .jar
+obsahující ukázkovı program. Vaším úkolem bude vytvoøit program se stejnımi funkcemi. 
+Ne zaènete programovat, pøeètìte si peèlivì zadání, vyzkoušejte si ukázkovı program
+a rozmyslete si, jak bude váš program vypadat. Pokud nìco nebude jasné, zeptejte se.
+
+
+Popis chování programu
+----------------------
+Program je jednoduchı prohlíeè postav, schopnı zobrazit a manipulovat se stromem
+reprezentujícím jednotlivé skupiny postav z filmu Hvìzdné války a samotné postavy
+zaøazené do skupin (s tím e kadá postava smí bıt jen v jedné skupinì a tvoøí tak
+strom).
+
+1) Strom a datovı model 
+   Strom obsahuje nìkolik kategorií postav a samotné postavy. Kadá kategorie mùe
+   obsahovat další podkategorie nebo postavy, postava je vdy listem stromu a nemùe
+   tak obsahovat ádné potomky.
+   Pro reprezentaci postav a kategorií mùete pouít tøídy pøiloené v adresáøi 
+   "zaklad", není to povinné, ale mùe Vám to ušetøit cennı èas. SWNode nese jen 
+   data spojená s jedním uzlem stromu (tedy postavou nebo kategorií), nereprezentuje 
+   strukturu stromu. Pøi zobrazení jsou kategorie zobrazeny tuènì a èernì, postavy 
+   jsou zobrazeny normálním øezem písma a èervenou barvou. Pokud je kategorie 
+   prázdná (neobsahuje ádné postavy nebo podkategorie), bude zobrazena šedou barvou 
+   místo èerné (v pøíkladu jsou to kategorie Pilots a Jedi v kategorii Rebels).
+   Potomci nejsou v rámci kategorie nijak øazeni.
+   Ve stromu je moné editivat jména postav, ale u ne jména kategorií. Pøi pokusu o 
+   editaci kategorie by se vùbec nemìl otevøít editor, ten funguje jen pro postavy. 
+   Jméno postavy musí bıt neprázdné a editor musí zajistit e pøi pokusu o vloené 
+   prázdného jména se poloka vrátí k pùvodní hodnotì.
+   Koøen stromu není zobrazen, vidìt jsou a jeho potomci.   	
+2) Zobrazená data
+   V pravé èásti okna jsou zobrazeny detaily vybrané poloky. Pokud není ádná poloka
+   vybrána, je to v zobrazení idnikováno vıpisem "nothing selected" a vypnutím
+   tlaèítka pro ukládání a textové oblasti.
+   Ve vıpisu je:
+   Jméno postavy - tuènì a velkım písmem
+   Pøíslušnost - do jaké skupiny postava patøí. Je to vdy kategorie 1. úrovnì (tedy
+                 pøímı potomek koøene). 
+   Fotografie - obrázek vybrané postavy èi kategorie pokud je k dispozici nebo defaultní
+                obrázek.
+   Popis - textovı popis vybrané kategorie nebo postavy. Jen tato poloka je editovatelná.
+           Popis není automaticky ukládán, uloí se a po stisknutí tlaèítka pod ním. 
+3) Tlaèítka
+   Ve spodní èásti aplikace jsou 4 tlaèítka - je moné pøidávat a ubírat kategorie 
+   a postavy a ukonèit aplikaci. 
+   Pro pøidávání jsou dvì tlaèítka, pro pøidání kategorie a postavy. Novı objekt se
+   pøidává jako potomek vybraného, pokud je vybrána postava, pøidávání tedy není 
+   moné a objeví se chybovı dialog. Kategorii je moné pøidat i kdy není nic vybráno, 
+   uloí se pak do koøene (jako kategorie 1. úrovnì). Jméno postavy nebo kategorie
+   musí bıt vyplnìno do pole nad tlaèítky, nesmí bıt prázdné (v takovém pøípadì se 
+   objeví chybové hlášení).
+   Mazání funguje pro postavy i kategorie, pøed mazáním program neádá o potvrzení. 
+   Po smazání uzlu není nic vybráno a pole na pravé stranì by na to mìla reagovat.
+   Ukonèení programu by mìlo probìhnout "hezky", tak aby se provedly pøípadné 
+   ukonèovací operace.
+   
+Poznámky k implementaci       
+-----------------------
+
+- Není nutné naplnit strom stejnımi daty, ale je potøeba dodret strukturu (kategorie a osoby, 
+  podpadpis podle kategorie první úrovnì, nemonost pøidávat potomky osobám).
+- Všimìnte si, e kdy není nic vybráno a maete poloky stromou, objeví se chybové 
+  hlášení.
+- Text a obrázek na pravé stranì reaguje na zmìnu vıbìru tabulky, a u je vıbìr proveden myší 
+  nebo klávesnicí, toté platí i pro cestu.
+- Dùleité je hlavnì vkládání a mazání poloek stromu a zobrazení obrázku na pravé stranì
+- Obrázek by se mìl naèítat vdy jen jednou.
+- Tøída ImageView má metody pro zmìnu velikosti obrázku, pokud s tím budete mít problém, podívejte se do API
+- Nezapomeòte do stromu vloit nìjaká základní data.  
+  
+Bonusy navíc
+------------
+- Pouití FXML a CSS (správnì provedené) je hodnocené + 3 body 

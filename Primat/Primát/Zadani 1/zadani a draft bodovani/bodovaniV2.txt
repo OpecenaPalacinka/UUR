@@ -1,0 +1,36 @@
+Bodování - Airplane database (návrh)
+
+Nutné pøedpoklady (bez nich nebude zkouška ani hodnocena)
+
+- Vytvoøení všech komponent GUI (tabulka, tlaèítka, menu, textarea - pokud nezvládnutý splitPanel nevadí, ten je za body)
+- Vložení nìkolika záznamù do tabulky
+- Fungující combobox pro nastavení typu letadla
+- Spustitelný program 
+
+Bodované vlastnosti  
+
+- Správné mazání všech oznaèených øádek: 4
+- Fungující renderer data (datum kurzívou): 3
+- Fungující editor data (sloupec 5, vytváøí DatePicker): 3
+- Fungující pøidávání øádek: 3
+- Fungující reakce rendereru data na null (vypisuje "not set"): 3
+- Správné formátování data (nìmèina): 3
+- Ošetøení vstupu u váhy a doletu: 3
+- Formátování váhy a doletu podle nìmeckých pravidel: 3
+- Použití SplitPanelu: 3
+- Do data lze krom data vložit prázdný øetìzec: 2
+- Dialog s výpisem mazaných letadel, naformátovaný (úzký text): 2
+- Reakce na výbìr - text se mìní pøi jakékoliv zmìnì výbìru (i klávesnicí): 2
+- Nastavené klávesové zkratky: 2
+- Odpovídající layout (pozice dìlítka, rozmìry) : 2
+- Nastavené akcelerátory: 1
+- Pokud není datum nastaveno, editor inicializován na prázdný øetìzec: 1
+
+Bonus:
+- DatePicker je od zaèátku s èerným textem u mìsíce a dne: 3
+- Použití FXML a CSS: 3  
+- ComboBox v typu lodi inicializován z enumu: 2
+- v dialozích je "Cancel" a ne "Abbrechen": 3-
+ 
+  
+
